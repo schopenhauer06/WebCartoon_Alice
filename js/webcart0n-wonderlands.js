@@ -294,14 +294,11 @@ function affiche_les_alices()
 
 var lapinou_bank = [
 {name:"alice", url:'./res/lapin_jorge_couto.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_roxane.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8%", top:"auto", right:"20%", left:"auto", width: "80px", height:"auto" },
-{name:"alice", url:'./res/alice_anissa.gif', zindex:100, bottom:"15%", top:"auto",          right:"auto", left:"38%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:100, bottom:"12%", top:"auto",  right:"auto", left:"25%", width: "150px", height:"auto" }
+{name:"alice", url:'./res/lapin_lapin.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/lapin_iman.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/lapin_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/lapin_katheryn.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/lapin_ocean.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
 ];
 
 
