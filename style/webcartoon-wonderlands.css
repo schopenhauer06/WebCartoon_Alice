@@ -179,3 +179,35 @@ margin-bottom: -10%;
 	background-image: url(../res/ui/poignee-duplic.png); 
 
 }
+
+/******************************************/
+/******** LAPIN ***************************/
+/******************************************/
+
+#terrier
+{
+  position: fixed;
+  width: 130px;
+  height: 50px;
+  bottom: 0px;
+  left: 0px;
+  
+  background-color: yellow;
+/*  bac */
+  z-index: 2000;
+}
+#terrier:hover
+{
+ 	cursor: pointer; /* move */ 
+}
+
+
+.lapinou
+{
+  position: fixed;
+}
+
+.lapinou img {
+	width: 100%;
+}
+

@@ -106,6 +106,9 @@ function affiche_wonderlands(e) {
   //on affiche les alices
   //TODO precharge les alice dans document complete ?
   affiche_les_alices();
+  
+  
+  document.getElementById('terrier').onclick = function(){crazyLapinou();};
 }
 
 /*
@@ -144,15 +147,15 @@ layer2.style.top= (yPosition/80-50)+"px";
 
 
 var alice_bank = [
-{name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:100, bottom:"30%", top:"auto", right:"40%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:100, bottom:"3%", top:"auto", right:"10%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:100, bottom:"20%", top:"auto", right:"auto", left:"50%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_bilel.gif', zindex:100, bottom:"20%", top:"auto", right:"auto", left:"35%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:100, bottom:"auto", top:"10%", right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_roxane.gif', zindex:100, bottom:"2%", top:"auto", right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"auto", top:"30%", right:"20%", left:"auto", width: "80px", height:"auto" },
-{name:"alice", url:'./res/alice_anissa.gif', zindex:100, bottom:"15%", top:"auto", right:"auto", left:"18%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:100, bottom:"12%", top:"auto", right:"auto", left:"50%", width: "150px", height:"auto" }
+{name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_roxane.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8%", top:"auto", right:"20%", left:"auto", width: "80px", height:"auto" },
+{name:"alice", url:'./res/alice_anissa.gif', zindex:100, bottom:"15%", top:"auto",          right:"auto", left:"38%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:100, bottom:"12%", top:"auto",  right:"auto", left:"25%", width: "150px", height:"auto" }
 ];
 
 function affiche_les_alices()
@@ -288,7 +291,45 @@ function affiche_les_alices()
 	$(document).mouseup( stopRotate );
 
 }
-  
+
+var lapinou_bank = [
+{name:"alice", url:'./res/lapin_jorge_couto.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_roxane.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8%", top:"auto", right:"20%", left:"auto", width: "80px", height:"auto" },
+{name:"alice", url:'./res/alice_anissa.gif', zindex:100, bottom:"15%", top:"auto",          right:"auto", left:"38%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:100, bottom:"12%", top:"auto",  right:"auto", left:"25%", width: "150px", height:"auto" }
+];
+
+
+function crazyLapinou() {
+
+
+  for (var i = 0; i < lapinou_bank.length; ++i)
+  {
+    var newElemDiv = document.createElement("div");
+    newElemDiv.setAttribute("class", "lapinou");
+    
+    newElemDiv.style.bottom =  getRandomIntInclusive(0,90) + "%";
+//    newElemDiv.style.top = lapinou_bank[i].top;
+    newElemDiv.style.right = getRandomIntInclusive(0,90) + "%";
+//    newElemDiv.style.left = lapinou_bank[i].left;
+    newElemDiv.style.width = lapinou_bank[i].width;
+    newElemDiv.style.height = lapinou_bank[i].height;
+    newElemDiv.style.zIndex = lapinou_bank[i].zindex;
+    
+    var newElemImg = document.createElement("img");
+    newElemImg.src = lapinou_bank[i].url;
+    newElemDiv.appendChild(newElemImg);
+    
+    var wonderParaElem = document.getElementById("wonderparallax");
+    wonderParaElem.appendChild(newElemDiv);
+  }
+
+}
 /* UTILS */
 
 // Update the scene to context client screen
