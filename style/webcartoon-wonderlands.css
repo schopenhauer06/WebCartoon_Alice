@@ -1,0 +1,117 @@
+/******************************************/
+/******** WebCartoon / ALICE IN WONDER ****/
+/******************************************/
+
+
+body {
+}
+
+/******************************************/
+/******** BOUCHE **************************/
+/******************************************/
+
+#bouchecentre{
+
+/*  background-color: lightblue; */
+    width: 800px;
+    margin: auto;
+    margin-top: 20%;
+    z-index: -10;
+}
+
+#bouchecentre div {
+    display: inline;
+    float: none;
+}
+
+/******************************************/
+/******** PARALLAX ************************/
+/******************************************/
+
+#wonderparallax
+{
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+.wonderlands
+{
+  position: fixed;
+  height: 100%; 
+  width: 100%; /* may not be necessary */
+}
+
+.wonderlands div
+{
+	background-position:center center;
+  background-size:100%;
+  background-repeat:no-repeat;
+
+  height: 100%;
+  position: absolute;
+}
+
+#wonderlands_avant {
+  background-image: url(../res/Wonderlands01.png);
+
+  width: 104%;
+  
+padding-left: 2%;
+margin-left: -2%;
+padding-top: 2%;
+margin-top: -2%;
+padding-bottom: 2%;
+margin-bottom: -2%;
+}
+
+#wonderlands_milieu {
+  background-image: url(../res/Wonderlands02.png);
+  width: 110%;
+    top: 0;
+    
+padding-left: 4%;
+margin-left: -4%;
+padding-bottom: 4%;
+margin-bottom: -4%;
+}
+
+#wonderlands_apres {
+background-image: url(../res/Wonderlands03.gif);
+
+  width: 120%;
+     top: 0;
+     
+ padding-left: 10%;
+margin-left: -10%;
+padding-bottom: 10%;
+margin-bottom: -10%;
+}
+
+#wdl_avant
+{
+  z-index: 500;
+}
+#wdl_milieu
+{
+  z-index: 1;
+}
+#wdl_apres
+{
+  z-index: 0;
+}
+
+/******************************************/
+/******** ALICE ***************************/
+/******************************************/
+
+
+.alice
+{
+  position: fixed;
+}
+
+.alice img {
+	width: 100%;
+}
