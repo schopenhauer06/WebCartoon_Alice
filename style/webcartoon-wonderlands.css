@@ -19,6 +19,10 @@ body {
     z-index: -10;
 }
 
+.boucheloaded:hover{
+cursor: pointer; /* move */
+}
+
 #bouchecentre div {
     display: inline;
     float: none;
@@ -114,4 +118,64 @@ margin-bottom: -10%;
 
 .alice img {
 	width: 100%;
+}
+
+
+.corner {
+    position: absolute;
+    width: 10px;
+    height: 10px
+}
+.TL {
+    top: 0px;
+    left: 0px
+}
+.TR {
+
+    top: 0px;
+    right: 0px
+}
+.BL {
+    bottom: 0px;
+    left: 0px
+}
+.BR {
+    bottom: 0px;
+    right: 0px
+}
+
+
+.draggable:hover {
+	cursor: pointer; /* move */
+	
+}
+
+.resizable {  
+
+} 
+
+.resizable:hover {
+
+}
+
+.resizable img {
+	display: block;
+}
+/*
+.resizeui{	
+	background-image: url(../res/ui/poignee-taille.png); 
+}
+*/
+.rotatable {
+	background-image: url(../res/ui/poignee-rotato.png);
+
+}
+
+.rotatable:hover{	
+	transform : rotate(45deg);
+}
+
+.duplicatable{
+	background-image: url(../res/ui/poignee-duplic.png); 
+
 }
