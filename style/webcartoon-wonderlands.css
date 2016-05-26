@@ -36,13 +36,28 @@ cursor: pointer; /* move */
 {
   position: fixed;
   visibility: hidden;
+  width: 100%;
+  padding-top: 28.125%; /* 56.25%; /*16/9 */
+  padding-bottom: 28.125%; /*16/9 */
+  top: 0;
+  left: 0;
+}
+
+#sizeneuvieme {
+  width: 100%;
+  padding-bottom: 56.25%; /*16/9 */
+  background:gold; /** <-- For the demo **/
+  position: fixed;
   top: 0;
   left: 0;
 }
 
 .wonderlands
 {
-  position: fixed;
+/*test posi >>>*/
+  position: absolute;
+  top: 0;
+/*test posi <<< position: fixed; */
   height: 100%; 
   width: 100%; /* may not be necessary */
 }
@@ -59,15 +74,15 @@ cursor: pointer; /* move */
 
 #wonderlands_avant {
   background-image: url(../res/Wonderlands01.png);
-
   width: 104%;
-  
-padding-left: 2%;
-margin-left: -2%;
-padding-top: 2%;
-margin-top: -2%;
-padding-bottom: 2%;
-margin-bottom: -2%;
+     top: 0;
+
+  padding-left: 2%;
+  margin-left: -2%;
+  /*padding-top: 2%;
+  margin-top: -2%;*/
+  padding-bottom: 2%;
+  margin-bottom: -2%;
 }
 
 #wonderlands_milieu {
@@ -75,23 +90,24 @@ margin-bottom: -2%;
   width: 110%;
     top: 0;
     
-padding-left: 4%;
-margin-left: -4%;
-padding-bottom: 4%;
-margin-bottom: -4%;
+  padding-left: 4%;
+  margin-left: -4%;
+  padding-bottom: 4%;
+  margin-bottom: -4%;
 }
 
 #wonderlands_apres {
-background-image: url(../res/Wonderlands03.gif);
-
+  background-image: url(../res/Wonderlands03.gif);
   width: 120%;
      top: 0;
      
- padding-left: 10%;
-margin-left: -10%;
-padding-bottom: 10%;
-margin-bottom: -10%;
+  padding-left: 10%;
+  margin-left: -10%;
+  padding-bottom: 10%;
+  margin-bottom: -10%;
 }
+
+
 
 #wdl_avant
 {
@@ -113,7 +129,9 @@ margin-bottom: -10%;
 
 .alice
 {
-  position: fixed;
+/*test posi >>>*/
+  position: absolute;
+/*test posi <<<   position: fixed;*/
 }
 
 .alice img {
@@ -186,7 +204,9 @@ margin-bottom: -10%;
 
 #terrier
 {
-  position: fixed;
+/*test posi >>>*/
+  position: absolute;
+/*test posi <<<   position: fixed;*/
   width: 130px;
   height: 50px;
   bottom: 0px;
@@ -204,7 +224,9 @@ margin-bottom: -10%;
 
 .lapinou
 {
-  position: fixed;
+/*test posi >>>*/
+  position: absolute;
+/*test posi <<<   position: fixed;*/
 }
 
 .lapinou img {

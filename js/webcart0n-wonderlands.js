@@ -29,6 +29,10 @@
 /************************************************************************************/
 
 
+//TODO : fix replace des alices apres changement resolution (ctrl-f5)
+//TODO precharge les alice dans document complete ?
+//TODO parallax : pourcentage base sur taille ecran !!!
+
   var defaults = {
     strength: 25,
     scale: 1.05,
@@ -183,7 +187,7 @@ function affiche_les_alices()
 					item.style.left = this.style.left;
 					item.style.top = this.style.top;
 					//update alice size based on screen coordinate
-          var altitude = (100/getClientSceneSizeY())*parseInt(this.style.top);
+          var altitude = (100/getSceneSizeY())*parseInt(this.style.top);
           var sizefactor = altitude/100;
           this.setAttribute("sizefactor", sizefactor);
           this.style.width =  this.getAttribute("originalwidth") * (sizefactor+0.2) +"px";
@@ -409,6 +413,10 @@ function getClientSceneSizeY()
 	return clientSceneSizeY;
 }
 
+function getSceneSizeY()
+{
+  return document.getElementById("wonderparallax").clientHeight;
+}
 
 //////////////// ROTATE
 
