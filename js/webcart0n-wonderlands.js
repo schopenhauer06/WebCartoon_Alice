@@ -271,10 +271,9 @@ function affiche_les_alices()
 //		$(this).mousedown( startRotate );
 //  	});
 
-
-    var newElemBL = document.createElement("div");
-    newElemBL.setAttribute("class", "corner BL duplicatable");
-    newElemDiv.appendChild(newElemBL);
+//    var newElemBL = document.createElement("div");
+//    newElemBL.setAttribute("class", "corner BL duplicatable");
+//    newElemDiv.appendChild(newElemBL);
 
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemAlpha);
