@@ -66,7 +66,7 @@ function bouche_random() {
   var bouchecentre = document.getElementById('bouchecentre'); //get the element
   bouchecentre.setAttribute('class', "boucheloaded") ;
   var delayInSeconds = 1;                           //delay in seconds
-   
+
   var bouche_bank = ['./res/bouche_anissaAITALIOUYAHIA_3cruels2.gif',
 './res/bouche_roxane.gif',
 './res/bouche_barakaISSIHAKA_3cruel.gif',
@@ -77,15 +77,15 @@ function bouche_random() {
   var bouche_elements = document.getElementsByClassName('bouche');
 
   bouche_random_timerid = setInterval(function()  //interval changer
-  {                           
+  {
     var bouche_nb = bouche_bank.length-1;
     for (var i = 0; i < bouche_elements.length; ++i)
     {
-      var item = bouche_elements[i];  
+      var item = bouche_elements[i];
       item.src = bouche_bank[getRandomIntInclusive(0, bouche_nb)];    //change picture
-    }       
+    }
   }, delayInSeconds * 1000);
-  
+
 }
 
 function affiche_wonderlands(e) {
@@ -165,7 +165,7 @@ function affiche_les_alices()
   {
 	  var newElemAlpha= document.createElement("div");
     newElemAlpha.setAttribute("class", "resizable draggable alice");
-    
+
     $(newElemAlpha).draggable({
 			scroll: false,
 			cursor: "move",
@@ -297,14 +297,12 @@ var lapinou_bank = [
 ];
 
 
-function crazyLapinou() {
-
-
+function crazyLapinou()
+{
   for (var i = 0; i < lapinou_bank.length; ++i)
   {
     var newElemDiv = document.createElement("div");
     newElemDiv.setAttribute("class", "lapinou");
-    
     newElemDiv.style.bottom =  getRandomIntInclusive(0,90) + "%";
 //    newElemDiv.style.top = lapinou_bank[i].top;
     newElemDiv.style.right = getRandomIntInclusive(0,90) + "%";
@@ -312,14 +310,44 @@ function crazyLapinou() {
     newElemDiv.style.width = lapinou_bank[i].width;
     newElemDiv.style.height = lapinou_bank[i].height;
     newElemDiv.style.zIndex = lapinou_bank[i].zindex;
-    
+
     var newElemImg = document.createElement("img");
     newElemImg.src = lapinou_bank[i].url;
     newElemDiv.appendChild(newElemImg);
-    
+
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemDiv);
   }
+
+  var delayInSeconds = 1;                           //delay in seconds
+  var lapinou_elements = document.getElementsByClassName('lapinou');
+
+  var lapinou_random_timerid = setInterval(function()  //interval changer
+  {
+    for (var i = 0; i < lapinou_elements.length; ++i)
+    {
+      var item = lapinou_elements[i];
+      switch(getRandomIntInclusive(0,3))
+      {
+        case 0: //NE
+            item.style.bottom = parseInt(item.style.bottom) + 5 + "%";
+            item.style.right = parseInt(item.style.right) + 5 + "%";
+        break;
+        case 1: //NW
+            item.style.bottom = parseInt(item.style.bottom) + 5 + "%";
+            item.style.right = parseInt(item.style.right) - 5 + "%";
+        break;
+        case 2: //SW
+            item.style.bottom = parseInt(item.style.bottom) - 5 + "%";
+            item.style.right = parseInt(item.style.right) - 5 + "%";
+        break;
+        case 3: //SE
+            item.style.bottom = parseInt(item.style.bottom) - 5 + "%";
+            item.style.right = parseInt(item.style.right) + 5 + "%";
+        break;
+      }
+    }
+  }, delayInSeconds * 1000);
 
 }
 /* UTILS */
