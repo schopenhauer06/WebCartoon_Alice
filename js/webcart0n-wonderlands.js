@@ -173,19 +173,20 @@ function affiche_les_alices()
 				{
 				  //on start display div front
 					var divIndex = this.id.substring(5); // alpha.lenght
-					$("#alice"+divIndex).css("zIndex", 1001);
-
+					document.getElementById("alice"+divIndex).style.zIndex = 1001;
 				},
 			drag: function()
 				{
 					var divIndex = this.id.substring(5); // alpha.lenght
-					$("#alice"+divIndex).css('left', $(this).css('left'));
-					$("#alice"+divIndex).css('top', $(this).css('top'));
-					$("#alice"+divIndex).css('height', $(this).css('height'));
+//          var altitude = 
+				  var item = document.getElementById("alice"+divIndex);
+					item.style.left = this.style.left;
+					item.style.top = this.style.top;
+					item.style.height = this.style.height;
 				},
 			stop: function(event, ui)
 				{
-	       var divIndex = this.id.substring(5); // alpha.lenght
+	        var divIndex = this.id.substring(5); // alpha.lenght
 // On limite la zone de deplacement de l'object a l'interieur d'une zone
 /*					if ($(this).css("left").replace(/px|pt|%/,'')<getClientSceneSizeX()
 					 &&
@@ -193,18 +194,16 @@ function affiche_les_alices()
 						 $(this).css("top").replace(/px|pt|%/,'')<max_y_suivre && 
 						 $(this).css("top").replace(/px|pt|%/,'')>min_y) */
 					{
-
-						$("#alice"+divIndex).css("zIndex", 100+Math.floor(Math.random()*100));						
-						
-						
+					  //assign new zindex
+					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(100,120);
 						//get in screen position
-						var thisSizeX = $(this).width();
+						//var thisSizeX = $(this).width();
 //						var mousePosition = getMousePosition(event);
 				//		var positionX = mousePosition[0] - (thisSizeX/2);
 						//choose base zindex to glue the object to foreground (scene)or background (sky) 
-						var thiszIndexBase = 1;
-						var glueToSky = 1;
-						var fondPositionX;
+//						var thiszIndexBase = 1;
+//						var glueToSky = 1;
+//						var fondPositionX;
 /*						
 						if(mousePosition[1] > 220)
 						{
@@ -238,8 +237,7 @@ function affiche_les_alices()
     newElemAlpha.style.right = alice_bank[i].right;
     newElemAlpha.style.left = alice_bank[i].left;
     newElemAlpha.style.width = alice_bank[i].width;
-    //TODO §!!!!!!!! FIXED SIZE !
-    newElemAlpha.style.height = "100px";
+    //newElemAlpha.style.height : see after <img> creation
     newElemAlpha.style.zIndex = 1000;
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
