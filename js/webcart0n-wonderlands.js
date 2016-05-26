@@ -178,11 +178,18 @@ function affiche_les_alices()
 			drag: function()
 				{
 					var divIndex = this.id.substring(5); // alpha.lenght
-          var altitude = (100/getClientSceneSizeY())*parseInt(this.style.top);
+					//update alice position based on alpha'
 				  var item = document.getElementById("alice"+divIndex);
 					item.style.left = this.style.left;
 					item.style.top = this.style.top;
+					//update alice size based on screen coordinate
+          var altitude = (100/getClientSceneSizeY())*parseInt(this.style.top);
+          var sizefactor = altitude/100;
+          this.setAttribute("sizefactor", sizefactor);
+          this.style.width =  this.getAttribute("originalwidth") * sizefactor +"px";
+          this.style.height =  this.getAttribute("originalheight") * sizefactor +"px";
 					item.style.height = this.style.height;
+					item.style.width = this.style.width;
 				},
 			stop: function(event, ui)
 				{
@@ -194,8 +201,13 @@ function affiche_les_alices()
 						 $(this).css("top").replace(/px|pt|%/,'')<max_y_suivre && 
 						 $(this).css("top").replace(/px|pt|%/,'')>min_y) */
 					{
-					  //assign new zindex
-					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(100,120);
+					  //assign new zindex based on altitude (sizefactor)
+					  var zindexbase = 10;
+					  console.log(this.getAttribute("sizefactor"));
+					  if (parseFloat(this.getAttribute("sizefactor")) > 0.5 ) {
+					    zindexbase = 100;
+					  }
+					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(zindexbase,zindexbase+20);
 						//get in screen position
 						//var thisSizeX = $(this).width();
 //						var mousePosition = getMousePosition(event);
@@ -259,6 +271,8 @@ function affiche_les_alices()
     newElemDiv.appendChild(newElemImg);
 
     newElemAlpha.style.height = parseInt(alice_bank[i].width)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+    newElemAlpha.setAttribute("originalwidth", parseInt(alice_bank[i].width));
+    newElemAlpha.setAttribute("originalheight", parseInt(newElemAlpha.style.height));
 //    var newElemTL = document.createElement("div");
 //    newElemTL.setAttribute("class", "corner TL rotatable");
 //    newElemDiv.appendChild(newElemTL);
