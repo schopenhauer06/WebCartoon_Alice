@@ -41,7 +41,7 @@ var imageBeingRotated = false;  // The DOM image currently being rotated (if any
 var mouseStartAngle = false;    // The angle of the mouse relative to the image centre at the start of the rotation
 var imageStartAngle = false;    // The rotation angle of the image at the start of the rotation
 
-var clientSceneSizeX;
+var clientSceneSizeX, clientSceneSizeY;
 
 
 // hophop ya un debut a tout!
@@ -178,7 +178,7 @@ function affiche_les_alices()
 			drag: function()
 				{
 					var divIndex = this.id.substring(5); // alpha.lenght
-//          var altitude = 
+          var altitude = (100/getClientSceneSizeY())*parseInt(this.style.top);
 				  var item = document.getElementById("alice"+divIndex);
 					item.style.left = this.style.left;
 					item.style.top = this.style.top;
@@ -348,23 +348,40 @@ function crazyLapinou()
   }, delayInSeconds * 1000);
 
 }
-/* UTILS */
+
+/******************************************************************/
+/*********************** UTILS ************************************/
+/******************************************************************/
 
 // Update the scene to context client screen
-function updateSceneSize() {
-	
+// adapted from http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
+function updateSceneSize(){
+  clientSceneSizeX = 0;
+  clientSceneSizeY = 0;
+  if( typeof( window.innerWidth ) == 'number' ) {
+    //Non-IE
+    clientSceneSizeX = window.innerWidth;
+    clientSceneSizeY = window.innerHeight;
+  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+    //IE 6+ in 'standards compliant mode'
+    clientSceneSizeX = document.documentElement.clientWidth;
+    clientSceneSizeY = document.documentElement.clientHeight;
+  } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+    //IE 4 compatible
+    clientSceneSizeX = document.body.clientWidth;
+    clientSceneSizeY = document.body.clientHeight;
+  }
+
 	var factor = 0.3;
-	if (document.body.clientWidth > 1800){
+	if (clientSceneSizeX > 1800){
 		factor = 1.1;
-	}else if (document.body.clientWidth > 1000){
+	}else if (clientSceneSizeX > 1000){
 		factor = 0.8;
-	}else if (document.body.clientWidth > 800){
+	}else if (clientSceneSizeX > 800){
 		factor = 0.6;
-	}else if (document.body.clientWidth > 600){
+	}else if (clientSceneSizeX > 600){
 		factor = 0.5;
 	}
-	
-	clientSceneSizeX = document.body.clientWidth;;
 }
 
 
@@ -373,6 +390,10 @@ function getClientSceneSizeX()
 	return clientSceneSizeX;
 }
 
+function getClientSceneSizeY()
+{
+	return clientSceneSizeY;
+}
 
 
 //////////////// ROTATE
