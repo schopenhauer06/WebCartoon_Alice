@@ -163,19 +163,15 @@ function affiche_les_alices()
   var alice_nb = alice_bank.length;
   for (var i = 0; i < alice_nb; ++i)
   {
-//var divIndex = this.id.substring(5); // alpha.lenght
-
 	  var newElemAlpha= document.createElement("div");
     newElemAlpha.setAttribute("class", "resizable draggable alice");
-    $(newElemAlpha).draggable({ start: dragStart } ); // Make the animal draggable
     
-
-	$(newElemAlpha).draggable({
-
+    $(newElemAlpha).draggable({
 			scroll: false,
 			cursor: "move",
 			start: function(event, ui)
 				{
+				  //on start display div front
 					var divIndex = this.id.substring(5); // alpha.lenght
 					$("#alice"+divIndex).css("zIndex", 1001);
 
@@ -185,6 +181,7 @@ function affiche_les_alices()
 					var divIndex = this.id.substring(5); // alpha.lenght
 					$("#alice"+divIndex).css('left', $(this).css('left'));
 					$("#alice"+divIndex).css('top', $(this).css('top'));
+					$("#alice"+divIndex).css('height', $(this).css('height'));
 				},
 			stop: function(event, ui)
 				{
@@ -244,14 +241,12 @@ function affiche_les_alices()
     //TODO §!!!!!!!! FIXED SIZE !
     newElemAlpha.style.height = "100px";
     newElemAlpha.style.zIndex = 1000;
-//    newElemAlpha.style.backgroundColor = "yellow";
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
     	  
     var newElemDiv = document.createElement("div");
     newElemDiv.setAttribute("class", "resizable draggable alice");
 //    $(newElemDiv).draggable({ start: dragStart } ); // Make the animal draggable
-    
     newElemDiv.style.bottom = alice_bank[i].bottom;
     newElemDiv.style.top = alice_bank[i].top;
     newElemDiv.style.right = alice_bank[i].right;
@@ -260,20 +255,21 @@ function affiche_les_alices()
     newElemDiv.style.height = alice_bank[i].height;
     newElemDiv.style.zIndex = alice_bank[i].zindex;
     newElemDiv.id = "alice" + i;
-        
+
     var newElemImg = document.createElement("img");
     newElemImg.src = alice_bank[i].url;
-    newElemDiv.appendChild(newElemImg); 
-    
-    var newElemTL = document.createElement("div");
-    newElemTL.setAttribute("class", "corner TL rotatable");
-    newElemDiv.appendChild(newElemTL);
-    
-    $(newElemTL).each(function (index){   // Make the animal rotatable	 
-		var elementParent = $(this)[0].parentNode;	
-		$.data(elementParent, 'currentRotation', 0 ); 
-		$(this).mousedown( startRotate );
-  	});
+    newElemDiv.appendChild(newElemImg);
+
+    newElemAlpha.style.height = parseInt(alice_bank[i].width)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+//    var newElemTL = document.createElement("div");
+//    newElemTL.setAttribute("class", "corner TL rotatable");
+//    newElemDiv.appendChild(newElemTL);
+
+//    $(newElemTL).each(function (index){   // Make the animal rotatable
+//		var elementParent = $(this)[0].parentNode;
+//		$.data(elementParent, 'currentRotation', 0 );
+//		$(this).mousedown( startRotate );
+//  	});
 
 
     var newElemBL = document.createElement("div");
