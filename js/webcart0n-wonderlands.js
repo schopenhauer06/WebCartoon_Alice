@@ -186,8 +186,8 @@ function affiche_les_alices()
           var altitude = (100/getClientSceneSizeY())*parseInt(this.style.top);
           var sizefactor = altitude/100;
           this.setAttribute("sizefactor", sizefactor);
-          this.style.width =  this.getAttribute("originalwidth") * sizefactor +"px";
-          this.style.height =  this.getAttribute("originalheight") * sizefactor +"px";
+          this.style.width =  this.getAttribute("originalwidth") * (sizefactor+0.2) +"px";
+          this.style.height =  this.getAttribute("originalheight") * (sizefactor+0.2) +"px";
 					item.style.height = this.style.height;
 					item.style.width = this.style.width;
 				},
