@@ -32,7 +32,27 @@
 //TODO : fix replace des alices apres changement resolution (ctrl-f5)
 //TODO precharge les alice dans document complete ?
 //TODO parallax : pourcentage base sur taille ecran !!!
-
+//TODO touch screen support for alice
+//TODO gyroscope
+/*
+window.ondeviceorientation = function(event) {
+   var delta = Math.round(event.beta);
+ 
+    switch (window.orientation) {
+        case 0:
+            delta = Math.round(event.gamma);
+            break;
+        case 180:
+            delta = -Math.round(event.gamma);
+            break;
+    }
+ 
+   var position = 15000 + (delta * 400);
+   position = Math.floor(position);
+   sym.stop(position);
+   console.log(position);
+}
+*/
   var defaults = {
     strength: 25,
     scale: 1.05,
@@ -109,7 +129,7 @@ function affiche_wonderlands(e) {
 
   //on affiche les alices
   //TODO precharge les alice dans document complete ?
-  affiche_les_alices();
+ // affiche_les_alices();
   
   
   document.getElementById('terrier').onclick = function(){crazyLapinou();};
