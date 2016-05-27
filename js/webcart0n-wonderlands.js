@@ -72,7 +72,10 @@ var clientSceneSizeX, clientSceneSizeY;
 document.onreadystatechange = function () {
 
 
-  if (document.readyState == "complete") {
+  if (document.readyState == "complete")
+  {
+    document.documentElement.style.overflow = 'hidden';	 // firefox, chrome
+    document.body.scroll = "no";	// ie only
     window.onresize=function(){updateSceneSize();};
 	  //on lance la boucle des bouches
 	  bouche_random();
@@ -80,7 +83,7 @@ document.onreadystatechange = function () {
 	  document.getElementById('bouchecentre').onclick = affiche_wonderlands;
 	  
 	  updateSceneSize();
-	  }
+  }
 }
 
 var bouche_random_timerid;
@@ -120,18 +123,18 @@ function affiche_wonderlands(e) {
   clearTimeout(bouche_random_timerid);
 
   //on affiche le decors
- document.body.onmousemove = parallax_wonderland;  
- document.getElementById('wonderparallax').style.visibility = "visible";
+  document.body.style.backgroundColor = "black";
+  document.body.onmousemove = parallax_wonderland;
+  document.getElementById('wonderparallax').style.visibility = "visible";
 
   // on appelle a la main une premiere fois
   //pour eviter les glitch (de la position fixe des css)
- parallax_wonderland(e);
+  parallax_wonderland(e);
 
   //on affiche les alices
   //TODO precharge les alice dans document complete ?
- // affiche_les_alices();
-  
-  
+  affiche_les_alices();
+
   document.getElementById('terrier').onclick = function(){crazyLapinou();};
 }
 
@@ -140,35 +143,24 @@ adapt from http://allshoreit.com/Blog/?page_id=84
 */
 function parallax_wonderland(e){
   
-var layer1 = document.getElementById('wonderlands_avant');
-var layer2 = document.getElementById('wonderlands_milieu');
-var layer3 = document.getElementById('wonderlands_apres');
+ var layer1 = document.getElementById('wonderlands_avant');
+ var layer2 = document.getElementById('wonderlands_milieu');
+ var layer3 = document.getElementById('wonderlands_apres');
 
-var xPosition = e.clientX; //it stores the mouse X position
-var yPosition = e.clientY; //it stores the mouse Y position and both //changes with mouse move event per pixel.
+ var xPosition = e.clientX; //it stores the mouse X position
+ var yPosition = e.clientY; //it stores the mouse Y position and both //changes with mouse move event per pixel.
 
-// Now we will change the X position of each layer on mouse move, to provide the smooth and slow effect we will divide position with some numbers.
-//layer1.style.backgroundPosition=(xPosition/8-400)+"px " + (yPosition/8-600)+"px";
+ // Now we will change the X position of each layer on mouse move, to provide the smooth and slow effect we will divide position with some numbers.
+ // TODO pourcentage base sur taille ecran !!!???
+ layer1.style.right=(xPosition/100)+"px";
+ layer1.style.top= -(yPosition/100)+"px";
 
-// TODO pourcentage base sur taille ecran !!!
-// de haut en bas 
-// avant 4px , milieu 6 ciel 10
-//var 
-layer1.style.right=(xPosition/100-80)+"px";
-layer1.style.bottom= (yPosition/100)+"px";
+ layer2.style.right=(xPosition/80)+"px";
+ layer2.style.top= (yPosition/80)+"px";
 
-//layer2.style.backgroundPosition=(xPosition/6-300)+"px "+ (yPosition/6-300)+"px";
-
-layer2.style.right=(xPosition/80-50)+"px " 
-layer2.style.top= (yPosition/80-50)+"px";
-
-//layer3.style.backgroundPosition=(xPosition/4-400)+"px " + (yPosition/4-400)+"px";
-
- layer3.style.right=(xPosition/60-100)+"px " 
- layer3.style.top= (yPosition/60-50)+"px ";
-
+ layer3.style.right=(xPosition/60)+"px";
+ layer3.style.top= (yPosition/60)+"px";
 }
-
 
 var alice_bank = [
 {name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
