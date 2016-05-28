@@ -29,6 +29,7 @@
 /************************************************************************************/
 
 //PRIO 1
+//TODO alice position : conversion % en px a l'init
 //TODO : fix replace des alices apres changement resolution (ctrl-f5)
 //TODO Restrict alice drag in scene size
 //TODO Alice sound support (onhover)
@@ -74,7 +75,7 @@ var mouseStartAngle = false;    // The angle of the mouse relative to the image 
 var imageStartAngle = false;    // The rotation angle of the image at the start of the rotation
 
 var clientSceneSizeX, clientSceneSizeY;
-
+var shoudlUpdateElementsPosition = false;
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
@@ -147,6 +148,8 @@ function affiche_wonderlands(e) {
   affiche_les_alices();
 
   document.getElementById('terrier').onclick = function(){crazyLapinou();};
+  
+  shouldUpdateElementsPosition = true;
 }
 
 /*
@@ -253,6 +256,7 @@ function affiche_les_alices()
     newElemAlpha.id = "alpha" + i;
     	  
     var newElemDiv = document.createElement("div");
+    //TODO remove draggable 
     newElemDiv.setAttribute("class", "draggable alice");
     newElemDiv.style.bottom = alice_bank[i].bottom;
     newElemDiv.style.top = alice_bank[i].top;
@@ -280,12 +284,12 @@ function affiche_les_alices()
 }
 
 var lapinou_bank = [
-{name:"alice", url:'./res/lapin_jorge_couto.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/lapin_lapin.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/lapin_iman.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/lapin_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/lapin_katheryn.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/lapin_ocean.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_jorge_couto.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_lapin.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_iman.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_katheryn.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_ocean.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
 ];
 
 
@@ -376,6 +380,9 @@ function updateSceneSize(){
 	}else if (clientSceneSizeX > 600){
 		factor = 0.5;
 	}
+
+	if (shouldUpdateElementsPosition)
+  	updateElementsPosition();
 }
 
 
@@ -394,106 +401,21 @@ function getSceneSizeY()
   return document.getElementById("wonderparallax").clientHeight;
 }
 
-//////////////// ROTATE
+function updateElementsPosition()
+{
+  //update terrier position
+  var item = document.getElementById('terrier');
+  item.style.bottom = getClientSceneSizeY()/2 - getSceneSizeY()/2 + "px";
 
-/* adapted from http://www.elated.com/articles/smooth-rotatable-images-css3-jquery/ */
-// Prevent the image being dragged if it's already being rotated
-function dragStart( e, ui ) {
-  if ( imageBeingRotated ) return false;
+  var alice_elements = document.getElementsByClassName('alice');
+  for (var i = 0; i < alice_elements.length; ++i)
+  {
+ //   var item = alice_elements[i];
+ //   item.style.
+
+  }
+
 }
-
-/* adapted from http://www.elated.com/articles/smooth-rotatable-images-css3-jquery/ */
-function stopRotate( e ) {
-
-  // Exit if we're not rotating an image
-  if ( !imageBeingRotated ) return;
-
-  // Remove the event handler that tracked mouse movements during the rotation
-  $(document).unbind( 'mousemove' );
-
-  // Cancel the image rotation by setting imageBeingRotated back to false.
-  // Do this in a short while - after the click event has fired -
-  // to prevent the lightbox appearing once the Shift key is released.
-  setTimeout( function() { imageBeingRotated = false; }, 10 );
-  return false;
-}
-
-/* adapted from http://www.elated.com/articles/smooth-rotatable-images-css3-jquery/ */
-// Start rotating an image
-function startRotate( e ) {
-
-  // Track the image from parentElement that we're going to rotate
-  imageBeingRotated = this.parentElement;
-
-  // Store the angle of the mouse at the start of the rotation, relative to the image centre
-  var imageCentre = getImageCentre( imageBeingRotated );
-  var mouseStartXFromCentre = e.pageX - imageCentre[0];
-  var mouseStartYFromCentre = e.pageY - imageCentre[1];
-  mouseStartAngle = Math.atan2( mouseStartYFromCentre, mouseStartXFromCentre );
-
-  // Store the current rotation angle of the image at the start of the rotation
-  imageStartAngle = $(imageBeingRotated).data('currentRotation');
-
-  // Set up an event handler to rotate the image as the mouse is moved
-  $(document).mousemove( rotateImage );
-
-  return false;
-}
-
-/* adapted from http://www.elated.com/articles/smooth-rotatable-images-css3-jquery/ */
-// Rotate image based on the current mouse position
-function rotateImage( e ) {
-
-  // Exit if we're not rotating an image
-  if ( !imageBeingRotated ) return;
-
-  // Calculate the new mouse angle relative to the image centre
-  var imageCentre = getImageCentre( imageBeingRotated );
-  var mouseXFromCentre = e.pageX - imageCentre[0];
-  var mouseYFromCentre = e.pageY - imageCentre[1];
-  var mouseAngle = Math.atan2( mouseYFromCentre, mouseXFromCentre );
-
-  // Calculate the new rotation angle for the image
-  var rotateAngle = mouseAngle - mouseStartAngle + imageStartAngle;
-
-  // Rotate the image to the new angle, and store the new angle
-  $(imageBeingRotated).css('transform','rotate(' + rotateAngle + 'rad)');
-  $(imageBeingRotated).css('-moz-transform','rotate(' + rotateAngle + 'rad)');
-  $(imageBeingRotated).css('-webkit-transform','rotate(' + rotateAngle + 'rad)');
-  $(imageBeingRotated).css('-o-transform','rotate(' + rotateAngle + 'rad)');
-  $(imageBeingRotated).data('currentRotation', rotateAngle );
-  return false;
-}
-
-/* adapted from http://www.elated.com/articles/smooth-rotatable-images-css3-jquery/ */
-// Calculate the centre point of a given image
-function getImageCentre( image ) {
-
-  // Rotate the image to 0 radians
-  $(image).css('transform','rotate(0rad)');
-  $(image).css('-moz-transform','rotate(0rad)');
-  $(image).css('-webkit-transform','rotate(0rad)');
-  $(image).css('-o-transform','rotate(0rad)');
-
-  // Measure the image centre
-  var imageOffset = $(image).offset();
-  var imageCentreX = imageOffset.left + $(image).width() / 2;
-  var imageCentreY = imageOffset.top + $(image).height() / 2;
-
-  // Rotate the image back to its previous angle
-  var currentRotation = $(image).data('currentRotation');
-  $(imageBeingRotated).css('transform','rotate(' + currentRotation + 'rad)');
-  $(imageBeingRotated).css('-moz-transform','rotate(' + currentRotation + 'rad)');
-  $(imageBeingRotated).css('-webkit-transform','rotate(' + currentRotation + 'rad)');
-  $(imageBeingRotated).css('-o-transform','rotate(' + currentRotation + 'rad)');
-
-  // Return the calculated centre coordinates
-  return Array( imageCentreX, imageCentreY );
-}
-
-
-
-
 
 /* FROM MOZ DEV */
 function getRandomIntInclusive(min, max) {
