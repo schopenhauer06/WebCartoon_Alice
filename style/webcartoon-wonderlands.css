@@ -98,18 +98,6 @@ cursor: pointer; /* move */
 
 #wonderlands_milieu {
   background-image: url(../res/Wonderlands02.png);
-/*  width: 106%;
-  height: 106%;
-    top: 0;
-    
-  padding-left: 6%;
-  margin-left: -4%;
-  padding-right: 6%;
-  margin-right: -4%;
-  padding-top: 6%;
-  margin-top: -6%;
-  padding-bottom: 6%;
-  margin-bottom: -6%;*/
   width: 102%;
   height: 102%;
      top: 0;
@@ -138,14 +126,6 @@ cursor: pointer; /* move */
   margin-top: -4%;
   padding-bottom: 4%;
   margin-bottom: -4%;
-/*  width: 112%;
-  width: 112%;
-     top: 0;
-     
-  padding-left: 10%;
-  margin-left: -10%;
-  padding-bottom: 10%;
-  margin-bottom: -10%;*/
 }
 
 #wdl_cadre
@@ -179,64 +159,10 @@ cursor: pointer; /* move */
 	width: 100%;
 }
 
-.corner {
-    position: absolute;
-    width: 10px;
-    height: 10px
-}
-.TL {
-    top: 0px;
-    left: 0px
-}
-.TR {
-
-    top: 0px;
-    right: 0px
-}
-.BL {
-    bottom: 0px;
-    left: 0px
-}
-.BR {
-    bottom: 0px;
-    right: 0px
-}
-
 .draggable:hover {
 	cursor: pointer; /* move */
 	
 }
-
-.resizable {  
-
-} 
-
-.resizable:hover {
-
-}
-
-.resizable img {
-	display: block;
-}
-/*
-.resizeui{	
-	background-image: url(../res/ui/poignee-taille.png); 
-}
-*/
-.rotatable {
-	background-image: url(../res/ui/poignee-rotato.png);
-
-}
-
-.rotatable:hover{	
-	transform : rotate(45deg);
-}
-
-.duplicatable{
-	background-image: url(../res/ui/poignee-duplic.png); 
-
-}
-
 /******************************************/
 /******** LAPIN ***************************/
 /******************************************/

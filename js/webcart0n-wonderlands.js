@@ -28,12 +28,20 @@
 /* http://allshoreit.com/Blog/?page_id=84                                           */
 /************************************************************************************/
 
-
+//PRIO 1
 //TODO : fix replace des alices apres changement resolution (ctrl-f5)
+//TODO Restrict alice drag in scene size
+//TODO Alice sound support (onhover)
+//TODO Bouche sound
+//TODO Parallax sound
+//TODO Logo + page credit
+
+//PRIO 2
 //TODO precharge les alice dans document complete ?
 //TODO parallax : pourcentage base sur taille ecran !!!
 //TODO touch screen support for alice
 //TODO gyroscope
+
 /*
 window.ondeviceorientation = function(event) {
    var delta = Math.round(event.beta);
@@ -119,13 +127,16 @@ function affiche_wonderlands(e) {
 
   //on cache et stop les bouches
   var item = document.getElementById('bouchecentre');
-  item.style.visibility = "hidden";
+  item.style.display = "none";
   clearTimeout(bouche_random_timerid);
 
   //on affiche le decors
   document.body.style.backgroundColor = "black";
   document.body.onmousemove = parallax_wonderland;
   document.getElementById('wonderparallax').style.visibility = "visible";
+
+  var item = document.getElementById('terrier');
+  item.style.bottom = getClientSceneSizeY()/2 - getSceneSizeY()/2 + "px";
 
   // on appelle a la main une premiere fois
   //pour eviter les glitch (de la position fixe des css)
@@ -180,7 +191,7 @@ function affiche_les_alices()
   for (var i = 0; i < alice_nb; ++i)
   {
 	  var newElemAlpha= document.createElement("div");
-    newElemAlpha.setAttribute("class", "resizable draggable alice");
+    newElemAlpha.setAttribute("class", "draggable alice");
 
     $(newElemAlpha).draggable({
 			scroll: false,
@@ -193,6 +204,14 @@ function affiche_les_alices()
 				},
 			drag: function()
 				{
+//TODO Restrict drag in scene size
+// On limite la zone de deplacement de l'object a l'interieur d'une zone
+/*					if ($(this).css("left").replace(/px|pt|%/,'')<getClientSceneSizeX()
+					 &&
+						 $(this).css("left").replace(/px|pt|%/,'')>min_x &&
+						 $(this).css("top").replace(/px|pt|%/,'')<max_y_suivre &&
+						 $(this).css("top").replace(/px|pt|%/,'')>min_y) */
+					{
 					var divIndex = this.id.substring(5); // alpha.lenght
 					//update alice position based on alpha'
 				  var item = document.getElementById("alice"+divIndex);
@@ -206,16 +225,11 @@ function affiche_les_alices()
           this.style.height =  this.getAttribute("originalheight") * (sizefactor+0.2) +"px";
 					item.style.height = this.style.height;
 					item.style.width = this.style.width;
+					}
 				},
 			stop: function(event, ui)
 				{
 	        var divIndex = this.id.substring(5); // alpha.lenght
-// On limite la zone de deplacement de l'object a l'interieur d'une zone
-/*					if ($(this).css("left").replace(/px|pt|%/,'')<getClientSceneSizeX()
-					 &&
-						 $(this).css("left").replace(/px|pt|%/,'')>min_x && 
-						 $(this).css("top").replace(/px|pt|%/,'')<max_y_suivre && 
-						 $(this).css("top").replace(/px|pt|%/,'')>min_y) */
 					{
 					  //assign new zindex based on altitude (sizefactor)
 					  var zindexbase = 10;
@@ -224,41 +238,9 @@ function affiche_les_alices()
 					    zindexbase = 100;
 					  }
 					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(zindexbase,zindexbase+20);
-						//get in screen position
-						//var thisSizeX = $(this).width();
-//						var mousePosition = getMousePosition(event);
-				//		var positionX = mousePosition[0] - (thisSizeX/2);
-						//choose base zindex to glue the object to foreground (scene)or background (sky) 
-//						var thiszIndexBase = 1;
-//						var glueToSky = 1;
-//						var fondPositionX;
-/*						
-						if(mousePosition[1] > 220)
-						{
-							fondPositionX = getBackgroundPositionX();
-							//reminder : Scene ZIndex=100, door Zindex=101
-							thiszIndexBase = 101; glueToSky = 0;
-						}
-						else
-						{ 
-							fondPositionX = getSkyPositionX();
-						}
-*/
-						//convert to background position
-	/*					if(fondPositionX < 0)
-						{	positionX += Math.abs(fondPositionX) - DangBestLib.sceneTailleX; }
-						//update sprite Z
-						var divIndex = this.id.substring(5); // alpha.lenght
-						$("#pp"+divIndex).css("zIndex", thiszIndexBase+Math.floor(Math.random()*100));
-
-						scroll_suivre($(this).attr('id'), sizee, maxx, positionX, glueToSky);
-						*/
 					}
 				;}
-		});    
-    
-    
-    
+		});
     
     newElemAlpha.style.bottom = alice_bank[i].bottom;
     newElemAlpha.style.top = alice_bank[i].top;
@@ -271,8 +253,7 @@ function affiche_les_alices()
     newElemAlpha.id = "alpha" + i;
     	  
     var newElemDiv = document.createElement("div");
-    newElemDiv.setAttribute("class", "resizable draggable alice");
-//    $(newElemDiv).draggable({ start: dragStart } ); // Make the animal draggable
+    newElemDiv.setAttribute("class", "draggable alice");
     newElemDiv.style.bottom = alice_bank[i].bottom;
     newElemDiv.style.top = alice_bank[i].top;
     newElemDiv.style.right = alice_bank[i].right;
@@ -289,19 +270,6 @@ function affiche_les_alices()
     newElemAlpha.style.height = parseInt(alice_bank[i].width)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
     newElemAlpha.setAttribute("originalwidth", parseInt(alice_bank[i].width));
     newElemAlpha.setAttribute("originalheight", parseInt(newElemAlpha.style.height));
-//    var newElemTL = document.createElement("div");
-//    newElemTL.setAttribute("class", "corner TL rotatable");
-//    newElemDiv.appendChild(newElemTL);
-
-//    $(newElemTL).each(function (index){   // Make the animal rotatable
-//		var elementParent = $(this)[0].parentNode;
-//		$.data(elementParent, 'currentRotation', 0 );
-//		$(this).mousedown( startRotate );
-//  	});
-
-//    var newElemBL = document.createElement("div");
-//    newElemBL.setAttribute("class", "corner BL duplicatable");
-//    newElemDiv.appendChild(newElemBL);
 
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemAlpha);
@@ -309,10 +277,6 @@ function affiche_les_alices()
 //    document.body.appendChild(newElemDiv);
 
   }
-
-  // Add an event handler to stop the rotation when the mouse button is released
-	$(document).mouseup( stopRotate );
-
 }
 
 var lapinou_bank = [
