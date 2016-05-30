@@ -36,6 +36,7 @@ cursor: pointer; /* move */
 {
 /*  position: fixed;*/
   visibility: hidden;
+  display: none;
   width: 100%;
   padding-top: 28.125%; /* 56.25%; /*16/9 */
   padding-bottom: 28.125%; /*16/9 */
@@ -195,25 +196,21 @@ cursor: pointer; /* move */
 {
   position: absolute;
   width: 12%;
-/*  height: 16%; fixed in js */ 
+/*  height: 16%; /* info : fixed in js */ 
   bottom: 0%;
   left: 3%;
-  
 /*  background-color: yellow;*/
-/*  bac */
   z-index: 2000;
 }
 #terrier:hover
 {
- 	cursor: pointer; /* move */ 
+ 	cursor: pointer;
 }
 
 
 .lapinou
 {
-/*test posi >>>*/
   position: absolute;
-/*test posi <<<   position: fixed;*/
 }
 
 .lapinou img {
@@ -232,7 +229,7 @@ cursor: pointer; /* move */
 	position: fixed;
 	bottom: 10px;
 	right: 10px;
-	width: 200px;
+	width: 300px;
 	height: 75px;
 
 	z-index:2000;
@@ -241,6 +238,7 @@ cursor: pointer; /* move */
 #logooo:hover
 {
 	background-image: url(../res/wonderlands-logo-inv.png);
+	cursor: pointer;
 }
 
 /******************************************/
@@ -268,7 +266,7 @@ font-size: 80%;
 #creditpage .textcourant{
 background: white;
 font-style: oblique;
-margin-right: 2%;
+margin-right: 300px;
 margin-left: 2%;
 padding: 1%;
 }
