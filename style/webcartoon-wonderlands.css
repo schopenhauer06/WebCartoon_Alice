@@ -250,8 +250,14 @@ cursor: pointer; /* move */
 /******************************************/
 #creditpage
 {
+  display: none;
   position: fixed;
   top: 0px;
   left: 0px;
   
+}
+
+#creditpage .poesie{
+
+
 }

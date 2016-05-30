@@ -38,6 +38,7 @@
 //TODO Logo + page credit
 
 //PRIO 2
+//document.getElementById("my-link").addEventListener("click", myFunction, false);
 //TODO ajout class autoresizable pour la fonction mettre a jour position
 //TODO precharge les alice dans document complete ?
 //TODO parallax : pourcentage base sur taille ecran !!!
@@ -129,11 +130,6 @@ function bouche_random() {
 }
 
 function affiche_wonderlands(e) {
-
-  //on cache le credits
-  var item = document.getElementById('creditpage');
-  item.style.display = "none";
-
   //on cache et stop les bouches
   item = document.getElementById('bouchecentre');
   item.style.display = "none";
@@ -141,8 +137,7 @@ function affiche_wonderlands(e) {
 
   //on affiche le decors
   document.body.style.backgroundColor = "black";
-  document.body.onmousemove = parallax_wonderland;
-  document.getElementById('wonderparallax').style.visibility = "visible";
+  affiche_le_decors(true);
 
   item = document.getElementById('terrier');
   item.style.bottom = getSceneBottom() + "px";
@@ -457,6 +452,41 @@ function affichePersoAuChampi(event) {
 
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemDiv);
+  }
+}
+
+/******************************************************************/
+/*********************** UI ***************************************/
+/******************************************************************/
+var creditDisplayed = false;
+function afficheCredit()
+{
+  if(creditDisplayed)
+  {
+    //on cache le credits
+    var item = document.getElementById('creditpage');
+    item.style.display = "none";
+
+    affiche_le_decors(true);
+  }else {
+    affiche_le_decors(false);
+    //on affiche le credits
+    var item = document.getElementById('creditpage');
+    item.style.display = "inline";  
+  }
+  creditDisplayed = !creditDisplayed;
+}
+
+function affiche_le_decors(visible) {
+  if (visible) {
+//    document.body.addEventListener("mousemove", myFunction, false);
+    document.body.onmousemove = parallax_wonderland;
+//    document.getElementById('wonderparallax').style.display = "inline";
+    document.getElementById('wonderparallax').style.visibility = "visible";
+  }else{
+  //  document.body.onmousemove = parallax_wonderland;
+//    document.getElementById('wonderparallax').style.display = "none";
+    document.getElementById('wonderparallax').style.visibility = "hidden";
   }
 }
 
