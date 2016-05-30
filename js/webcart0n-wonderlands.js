@@ -135,9 +135,11 @@ function affiche_wonderlands(e) {
   item.style.display = "none";
   clearTimeout(bouche_random_timerid);
 
+  shouldUpdateElementsPosition = true;
   //on affiche le decors
   document.body.style.backgroundColor = "black";
   affiche_le_decors(true);
+  document.getElementById('wonderparallax').style.visibility = "visible";
 
   item = document.getElementById('terrier');
   item.style.bottom = getSceneBottom() + "px";
@@ -155,8 +157,6 @@ function affiche_wonderlands(e) {
   //on affiche le logooo
   update_logo_position(false);
   document.getElementById('logooo').style.visibility = "visible";
-  
-  shouldUpdateElementsPosition = true;
 }
 
 /*
@@ -243,7 +243,7 @@ function affiche_les_alices()
 					{
 					  //assign new zindex based on altitude (sizefactor)
 					  var zindexbase = 10;
-					  if (parseFloat(this.getAttribute("sizefactor")) > 0.5 ) {
+					  if (parseFloat(this.getAttribute("sizefactor")) > 0.60 ) {
 					    zindexbase = 120;
 					  }
 					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(zindexbase,zindexbase+20);
@@ -463,12 +463,15 @@ function affiche_les_credits()
   if(creditDisplayed)
   {
     //on cache le credits
+    window.scrollTo( 0, 0 );
     var item = document.getElementById('creditpage');
     item.style.display = "none";
     affiche_les_scrolls(false);
     affiche_le_decors(true);
+    updateSceneSize();
     update_logo_position(false);
   }else {
+    window.scrollTo( 0, 0 );
     affiche_le_decors(false);
     affiche_les_scrolls(true);
     update_logo_position(true);
@@ -483,12 +486,12 @@ function affiche_le_decors(visible) {
   if (visible) {
 //    document.body.addEventListener("mousemove", myFunction, false);
     document.body.onmousemove = parallax_wonderland;
-//    document.getElementById('wonderparallax').style.display = "block";
-    document.getElementById('wonderparallax').style.visibility = "visible";
+    document.getElementById('wonderparallax').style.display = "block";
+//    document.getElementById('wonderparallax').style.visibility = "visible";
   }else{
   //  document.body.onmousemove = parallax_wonderland;
-//    document.getElementById('wonderparallax').style.display = "none";
-    document.getElementById('wonderparallax').style.visibility = "hidden";
+    document.getElementById('wonderparallax').style.display = "none";
+//    document.getElementById('wonderparallax').style.visibility = "hidden";
   }
 }
 
