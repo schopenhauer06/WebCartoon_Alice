@@ -36,9 +36,9 @@
 //TODO Bouche sound
 //TODO Parallax sound
 //TODO Logo + page credit
-//TODO Tout les elements
 
 //PRIO 2
+//TODO ajout class autoresizable pour la fonction mettre a jour position
 //TODO precharge les alice dans document complete ?
 //TODO parallax : pourcentage base sur taille ecran !!!
 //TODO touch screen support for alice
@@ -47,7 +47,7 @@
 /*
 window.ondeviceorientation = function(event) {
    var delta = Math.round(event.beta);
- 
+
     switch (window.orientation) {
         case 0:
             delta = Math.round(event.gamma);
@@ -56,7 +56,7 @@ window.ondeviceorientation = function(event) {
             delta = -Math.round(event.gamma);
             break;
     }
- 
+
    var position = 15000 + (delta * 400);
    position = Math.floor(position);
    sym.stop(position);
@@ -69,12 +69,13 @@ window.ondeviceorientation = function(event) {
     animationSpeed: "100ms",
     contain: true,
     wrapContent: false
-  };  
-  
+  };
+
 var imageBeingRotated = false;  // The DOM image currently being rotated (if any)
 var mouseStartAngle = false;    // The angle of the mouse relative to the image centre at the start of the rotation
 var imageStartAngle = false;    // The rotation angle of the image at the start of the rotation
 
+var factorScene = 0.3;
 var clientSceneSizeX, clientSceneSizeY;
 var shouldUpdateElementsPosition = false;
 
@@ -133,9 +134,8 @@ function affiche_wonderlands(e) {
   var item = document.getElementById('creditpage');
   item.style.display = "none";
 
-
   //on cache et stop les bouches
-  var item = document.getElementById('bouchecentre');
+  item = document.getElementById('bouchecentre');
   item.style.display = "none";
   clearTimeout(bouche_random_timerid);
 
@@ -144,10 +144,10 @@ function affiche_wonderlands(e) {
   document.body.onmousemove = parallax_wonderland;
   document.getElementById('wonderparallax').style.visibility = "visible";
 
-  var item = document.getElementById('terrier');
+  item = document.getElementById('terrier');
   item.style.bottom = getSceneBottom() + "px";
   item.style.height = (getSceneSizeY()* parseInt(terrier_height)) / 100 + "px";
-  item.onclick = function(){crazyLapinou();};
+  item.onclick = crazyLapinou;
   // on appelle parallax_wonderland une premiere fois
   //pour eviter les glitch (de la position fixe des css)
   parallax_wonderland(e);
@@ -156,6 +156,11 @@ function affiche_wonderlands(e) {
   //TODO precharge les alice dans document complete ?
   affiche_les_alices();
   affiche_les_champis();
+  
+  //on affiche le logooo
+  item = document.getElementById('logooo');
+  item.style.bottom = getSceneBottom() + "px";
+  item.style.visibility = "visible";
   
   shouldUpdateElementsPosition = true;
 }
@@ -186,15 +191,15 @@ function parallax_wonderland(e){
 
 var alice_bank = [
 /*{name:"alice", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
-{name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:120, bottom:"15", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:120, bottom:"3", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:120, bottom:"20", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_bilel.gif', zindex:120, bottom:"20", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:120, bottom:"3", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_roxane.gif', zindex:120, bottom:"2", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8", top:"auto", right:"20%", left:"auto", width: "80px", height:"auto" },
-{name:"alice", url:'./res/alice_anissa.gif', zindex:120, bottom:"15", top:"auto",          right:"auto", left:"38%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"12", top:"auto",  right:"auto", left:"25%", width: "150px", height:"auto" }
+{name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:120, bottom:"15", top:"auto",  right:"40%", left:"auto", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:120, bottom:"3", top:"auto",      right:"10%", left:"auto", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:120, bottom:"20", top:"auto",  right:"auto", left:"50%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_bilel.gif', zindex:120, bottom:"20", top:"auto",           right:"30%", left:"auto", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:120, bottom:"3", top:"auto",   right:"auto", left:"10%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_roxane.gif', zindex:120, bottom:"2", top:"auto",           right:"auto", left:"42%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8", top:"auto", right:"20%", left:"auto", width: "80", height:"auto" },
+{name:"alice", url:'./res/alice_anissa.gif', zindex:120, bottom:"15", top:"auto",          right:"auto", left:"38%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"12", top:"auto",  right:"auto", left:"25%", width: "150", height:"auto" }
 ];
 
 function affiche_les_alices()
@@ -232,8 +237,8 @@ function affiche_les_alices()
           var altitude = (100/getSceneSizeY())*parseInt(this.style.top);
           var sizefactor = altitude/100;
           this.setAttribute("sizefactor", sizefactor);
-          this.style.width =  this.getAttribute("originalwidth") * (sizefactor+0.2) +"px";
-          this.style.height =  this.getAttribute("originalheight") * (sizefactor+0.2) +"px";
+          this.style.width =  this.getAttribute("originalwidth") * factorScene * (sizefactor+0.2) +"px";
+          this.style.height =  this.getAttribute("originalheight") * factorScene * (sizefactor+0.2) +"px";
 					item.style.height = this.style.height;
 					item.style.width = this.style.width;
 					}
@@ -256,12 +261,18 @@ function affiche_les_alices()
     newElemAlpha.style.top = alice_bank[i].top;
     newElemAlpha.style.right = alice_bank[i].right;
     newElemAlpha.style.left = alice_bank[i].left;
-    newElemAlpha.style.width = alice_bank[i].width;
+    newElemAlpha.style.width = alice_bank[i].width*factorScene + "px";
     //newElemAlpha.style.height : see after <img> creation
     newElemAlpha.style.zIndex = 2000;
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
-    	  
+//    newElemAlpha.style.backgroundColor = "orange";
+
+    //init alice size based on screen coordinate
+    var altitude = (100/getSceneSizeY())*parseInt(newElemAlpha.style.bottom);
+    var sizefactor = altitude/100;
+    newElemAlpha.setAttribute("sizefactor", sizefactor);
+
     var newElemDiv = document.createElement("div");
     //TODO remove draggable 
     newElemDiv.setAttribute("class", "draggable alice");
@@ -269,17 +280,21 @@ function affiche_les_alices()
     newElemDiv.style.top = alice_bank[i].top;
     newElemDiv.style.right = alice_bank[i].right;
     newElemDiv.style.left = alice_bank[i].left;
-    newElemDiv.style.width = alice_bank[i].width;
+//    newElemDiv.style.width = alice_bank[i].width + "px";
+    newElemDiv.style.width = alice_bank[i].width*factorScene + "px";
+//    newElemDiv.style.height = alice_bank[i].height;
     newElemDiv.style.height = alice_bank[i].height;
     newElemDiv.style.zIndex = alice_bank[i].zindex;
     newElemDiv.id = "alice" + i;
+    newElemDiv.setAttribute("sizefactor", sizefactor);
 
     var newElemImg = document.createElement("img");
     newElemImg.src = alice_bank[i].url;
     newElemDiv.appendChild(newElemImg);
 
-    newElemAlpha.style.height = parseInt(alice_bank[i].width)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
-    newElemAlpha.setAttribute("originalwidth", parseInt(alice_bank[i].width));
+//    newElemAlpha.style.height = alice_bank[i].width/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+    newElemAlpha.style.height = (alice_bank[i].width*factorScene)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+    newElemAlpha.setAttribute("originalwidth", alice_bank[i].width);
     newElemAlpha.setAttribute("originalheight", parseInt(newElemAlpha.style.height));
 
     var wonderParaElem = document.getElementById("wonderparallax");
@@ -310,8 +325,7 @@ function affiche_les_champis() {
     newElemAlpha.style.width = champi_bank[i].width;
     //newElemAlpha.style.height : see after <img> creation
     newElemAlpha.style.zIndex = 1000;
-    newElemAlpha.style.backgroundPosition = "0,0";  
-    newElemAlpha.onclick = function(){crazyLapinou();};
+    newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
 
     var newElemDiv = document.createElement("div");
@@ -324,12 +338,13 @@ function affiche_les_champis() {
     newElemDiv.style.height = champi_bank[i].height;
     newElemDiv.style.zIndex = champi_bank[i].zindex;
     newElemDiv.id = "champ" + i;
-    
+
     var newElemImg = document.createElement("img");
     newElemImg.src = champi_bank[i].url;
     newElemDiv.appendChild(newElemImg);
 
     newElemAlpha.style.height = parseInt(champi_bank[i].width)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+    newElemAlpha.onclick = affichePersoAuChampi;
 
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemAlpha);
@@ -402,6 +417,49 @@ function crazyLapinou()
 
 }
 
+var perso_bank = [
+/*{name:"lapinou", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
+{name:"chat", url:'./res/chat_katherynle.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "50px", height:"auto" },
+{name:"chat", url:'./res/chat_eyes.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "50px", height:"auto" },
+{name:"chat", url:'./res/chat_ocean.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "50px", height:"auto" },
+{name:"chat", url:'./res/chat_alyzea.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "50px", height:"auto" },
+{name:"peintre", url:'./res/bilel_peintre.gif', zindex:100, bottom:"7%", top:"auto",           right:"auto", left:"77%", width: "50px", height:"auto" },
+{name:"caterpillar", url:'./res/caterpilar_darsigovmouslim.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"caterpillar", url:'./res/alyzea_caterpillar.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"grenouille", url:'./res/gagik.Hakobyan.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"twins", url:'./res/katheryn_twins.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"rose", url:'./res/katheryn_rose.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"chapeau", url:'./res/katheryn_hat.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" }
+];
+
+
+function affichePersoAuChampi(event) {
+
+  var perso_nb = getRandomIntInclusive(0, perso_bank.length);
+  for (var i = 0; i < perso_nb; ++i)
+  {
+    var perso_index = getRandomIntInclusive(0, perso_bank.length);
+    var newElemDiv = document.createElement("div");
+    newElemDiv.setAttribute("class", "allperso");
+
+    newElemDiv.style.width = perso_bank[perso_index].width;
+    newElemDiv.style.height = perso_bank[perso_index].height;
+    newElemDiv.style.zIndex = perso_bank[perso_index].zindex;
+    newElemDiv.id = "perso" + perso_index;
+
+    var newElemImg = document.createElement("img");
+    newElemImg.src = perso_bank[perso_index].url;
+    newElemDiv.appendChild(newElemImg);
+
+    newElemDiv.style.top = event.clientY + getRandomIntInclusive(-100,100) - parseInt(newElemImg.height)/2 + "px";
+    newElemDiv.style.left = event.clientX + getRandomIntInclusive(-100,100) - parseInt(newElemImg.width)/2 + "px";
+
+
+    var wonderParaElem = document.getElementById("wonderparallax");
+    wonderParaElem.appendChild(newElemDiv);
+  }
+}
+
 /******************************************************************/
 /*********************** UTILS ************************************/
 /******************************************************************/
@@ -425,15 +483,14 @@ function updateSceneSize(){
     clientSceneSizeY = document.body.clientHeight;
   }
 
-	var factor = 0.3;
 	if (clientSceneSizeX > 1800){
-		factor = 1.1;
+		factorScene = 1.1;
 	}else if (clientSceneSizeX > 1000){
-		factor = 0.8;
+		factorScene = 0.8;
 	}else if (clientSceneSizeX > 800){
-		factor = 0.6;
+		factorScene = 0.6;
 	}else if (clientSceneSizeX > 600){
-		factor = 0.5;
+		factorScene = 0.5;
 	}
 
 	if (shouldUpdateElementsPosition)
@@ -465,16 +522,33 @@ function updateElementsPosition()
   //update terrier position
   var item = document.getElementById('terrier');
   item.style.bottom = getSceneBottom() + "px";
-  item.style.bottom = getSceneBottom() + "px";
   item.style.height = (getSceneSizeY()* parseInt(terrier_height)) / 100 + "px";
+  //update logooo position
+  item = document.getElementById('logooo');
+  item.style.bottom = getSceneBottom() + "px";
+
   //update alices' position (alphas included)
   var alice_elements = document.getElementsByClassName('alice');
   for (var i = 0; i < alice_elements.length; ++i)
   {
     var item = alice_elements[i];
     var divIndex = item.id.substring(5); // alpha.lenght
+    // TODO FROM THE TOP after drag!
     item.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
-    //if dragged, x pos in pixel (right/left)
+    
+    item.style.width =  parseInt(alice_bank[divIndex].width) * factorScene  +"px";
+//    item.style.width =  parseInt(alice_bank[divIndex].width) * factorScene * (item.getAttribute("sizefactor")+0.2) +"px";
+
+    //only for alpha div"
+    if(item.getAttribute("originalheight"))
+    {
+  //    console.log(parseInt(item.style.height) * factorScene +"px");
+      item.style.height =  parseInt(item.getAttribute("originalheight")) * factorScene +"px";
+    }
+
+//      item.style.height =  parseInt(alice_bank[divIndex].height) * factorScene * (item.getAttribute("sizefactor")+0.2) +"px";    
+
+    //TODO if dragged, x pos in pixel (right/left)
  //   if(item.style.right.indexOf("px")
  //     item.style.right = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
  //   item.style.
@@ -497,12 +571,4 @@ function updateElementsPosition()
 function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-
-
-
-
-
-
-
 
