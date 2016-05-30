@@ -465,10 +465,9 @@ function affiche_les_credits()
     //on cache le credits
     var item = document.getElementById('creditpage');
     item.style.display = "none";
-    update_logo_position(false);
     affiche_les_scrolls(false);
     affiche_le_decors(true);
-
+    update_logo_position(false);
   }else {
     affiche_le_decors(false);
     affiche_les_scrolls(true);
@@ -484,7 +483,7 @@ function affiche_le_decors(visible) {
   if (visible) {
 //    document.body.addEventListener("mousemove", myFunction, false);
     document.body.onmousemove = parallax_wonderland;
-//    document.getElementById('wonderparallax').style.display = "inline";
+//    document.getElementById('wonderparallax').style.display = "block";
     document.getElementById('wonderparallax').style.visibility = "visible";
   }else{
   //  document.body.onmousemove = parallax_wonderland;
