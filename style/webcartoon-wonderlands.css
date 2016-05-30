@@ -36,7 +36,7 @@ cursor: pointer; /* move */
 {
 /*  position: fixed;*/
   visibility: hidden;
-  display: none;
+/*  display: none; juste hidden pour prechargement*/
   width: 100%;
   padding-top: 28.125%; /* 56.25%; /*16/9 */
   padding-bottom: 28.125%; /*16/9 */
