@@ -430,7 +430,7 @@ var perso_bank = [
 
 function affichePersoAuChampi(event) {
 
-  var perso_nb = getRandomIntInclusive(0, perso_bank.length);
+  var perso_nb = 3;/* getRandomIntInclusive(0, perso_bank.length); */
   for (var i = 0; i < perso_nb; ++i)
   {
     var perso_index = getRandomIntInclusive(0, perso_bank.length-1);
