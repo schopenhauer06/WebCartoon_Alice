@@ -150,9 +150,7 @@ cursor: pointer; /* move */
 /******************************************/
 .alice
 {
-/*test posi >>>*/
   position: absolute;
-/*test posi <<<   position: fixed;*/
 }
 
 .alice img {
@@ -160,7 +158,7 @@ cursor: pointer; /* move */
 }
 
 .draggable:hover {
-	cursor: pointer; /* move */
+	cursor: move; /* move */
 	
 }
 
@@ -169,12 +167,22 @@ cursor: pointer; /* move */
 /******************************************/
 .champi
 {
-/*test posi >>>*/
   position: absolute;
-/*test posi <<<   position: fixed;*/
 }
 
 .champi img {
+	width: 100%;
+}
+
+/******************************************/
+/******** VRACELEMT ***************************/
+/******************************************/
+.allperso
+{
+  position: absolute;
+}
+
+.allperso img {
 	width: 100%;
 }
 
@@ -191,7 +199,7 @@ cursor: pointer; /* move */
   bottom: 0%;
   left: 3%;
   
-  background-color: yellow;
+/*  background-color: yellow;*/
 /*  bac */
   z-index: 2000;
 }
@@ -212,16 +220,57 @@ cursor: pointer; /* move */
 	width: 100%;
 }
 
+/******************************************/
+/******** LOGOOO ***************************/
+/******************************************/
+#logooo
+{
+  visibility: hidden;
+	background-image: url(../ressources/ui/artmobilis.png);
+	background-color: red;
+	background-repeat:no-repeat;
+	background-size: 100%;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 160px;
+	height: 75px;
 
+	z-index:2000;
+}
+
+#logooo:hover
+{
+	background-image: url(../ressources/ui/artmobilis-nb.png);
+	background-color: black;
+}
 
 /******************************************/
 /******** CREDIT ***************************/
 /******************************************/
-
 #creditpage
 {
-  position: fixed;
+  display: none;
+  position: absolute;
   top: 0px;
   left: 0px;
-  
+}
+
+#creditpage .poesie{
+background: white;
+font-style: oblique;
+margin-right: 10%;
+margin-left: 10%;
+max-width: 500px;
+border-radius: 20px;
+padding: 1%;
+font-size: 80%;
+}
+
+#creditpage .textcourant{
+background: white;
+font-style: oblique;
+margin-right: 2%;
+margin-left: 2%;
+padding: 1%;
 }
