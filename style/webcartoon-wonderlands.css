@@ -230,7 +230,7 @@ cursor: pointer; /* move */
 	bottom: 10px;
 	right: 10px;
 	width: 300px;
-	height: 75px;
+	height: 120px;
 
 	z-index:2000;
 }
@@ -246,27 +246,31 @@ cursor: pointer; /* move */
 /******************************************/
 #creditpage
 {
+  background-image: url(../res/Wonderlands01.png);
+  background-attachment: fixed;
   display: none;
   position: absolute;
   top: 0px;
   left: 0px;
+  margin-right: 300px
 }
 
 #creditpage .poesie{
 background: white;
 font-style: oblique;
-margin-right: 10%;
-margin-left: 10%;
+margin-right: 2%;
+margin-left: 2%;
 max-width: 500px;
-border-radius: 20px;
+border-top-right-radius: 30px;
+border-bottom-left-radius: 30px;
 padding: 1%;
 font-size: 80%;
 }
 
 #creditpage .textcourant{
 background: white;
-font-style: oblique;
-margin-right: 300px;
+text-align: justify;
+margin-right: 30px;
 margin-left: 2%;
 padding: 1%;
 }
