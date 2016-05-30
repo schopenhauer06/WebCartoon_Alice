@@ -31,19 +31,21 @@
 //PRIO 1
 //TODO alice position : conversion % en px a l'init
 //TODO : fix replace des alices apres changement resolution (ctrl-f5)
-//TODO Restrict alice drag in scene size
 //TODO Alice sound support (onhover)
 //TODO Bouche sound
 //TODO Parallax sound
 //TODO Logo + page credit
 
 //PRIO 2
+//TODO replace le all perso sur retaille ecran
 //document.getElementById("my-link").addEventListener("click", myFunction, false);
 //TODO ajout class autoresizable pour la fonction mettre a jour position
 //TODO precharge les alice dans document complete ?
 //TODO parallax : pourcentage base sur taille ecran !!!
 //TODO touch screen support for alice
 //TODO gyroscope
+//TODO Restrict alice drag in scene size
+
 
 /*
 window.ondeviceorientation = function(event) {
@@ -85,11 +87,9 @@ var terrier_height = "16%";
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
 
-
   if (document.readyState == "complete")
   {
-    document.documentElement.style.overflow = 'hidden';	 // firefox, chrome
-    document.body.scroll = "no";	// ie only
+    affiche_les_scrolls(false);
     window.onresize=function(){updateSceneSize();};
 	  //on lance la boucle des bouches
 	  bouche_random();
@@ -153,9 +153,8 @@ function affiche_wonderlands(e) {
   affiche_les_champis();
   
   //on affiche le logooo
-  item = document.getElementById('logooo');
-  item.style.bottom = getSceneBottom() + "px";
-  item.style.visibility = "visible";
+  update_logo_position(false);
+  document.getElementById('logooo').style.visibility = "visible";
   
   shouldUpdateElementsPosition = true;
 }
@@ -433,7 +432,7 @@ function affichePersoAuChampi(event) {
   var perso_nb = getRandomIntInclusive(0, perso_bank.length);
   for (var i = 0; i < perso_nb; ++i)
   {
-    var perso_index = getRandomIntInclusive(0, perso_bank.length);
+    var perso_index = getRandomIntInclusive(0, perso_bank.length-1);
     var newElemDiv = document.createElement("div");
     newElemDiv.setAttribute("class", "allperso");
 
@@ -459,20 +458,24 @@ function affichePersoAuChampi(event) {
 /*********************** UI ***************************************/
 /******************************************************************/
 var creditDisplayed = false;
-function afficheCredit()
+function affiche_les_credits()
 {
   if(creditDisplayed)
   {
     //on cache le credits
     var item = document.getElementById('creditpage');
     item.style.display = "none";
-
+    update_logo_position(false);
+    affiche_les_scrolls(false);
     affiche_le_decors(true);
+
   }else {
     affiche_le_decors(false);
+    affiche_les_scrolls(true);
+    update_logo_position(true);
     //on affiche le credits
     var item = document.getElementById('creditpage');
-    item.style.display = "inline";  
+    item.style.display = "inline";
   }
   creditDisplayed = !creditDisplayed;
 }
@@ -487,6 +490,16 @@ function affiche_le_decors(visible) {
   //  document.body.onmousemove = parallax_wonderland;
 //    document.getElementById('wonderparallax').style.display = "none";
     document.getElementById('wonderparallax').style.visibility = "hidden";
+  }
+}
+
+function affiche_les_scrolls(visible) {
+  if (visible) {
+    document.documentElement.style.overflow = 'visible';	 // firefox, chrome
+    document.body.scroll = "yes";	// ie only
+  }else {
+    document.documentElement.style.overflow = 'hidden';	 // firefox, chrome
+    document.body.scroll = "no";	// ie only
   }
 }
 
@@ -554,8 +567,7 @@ function updateElementsPosition()
   item.style.bottom = getSceneBottom() + "px";
   item.style.height = (getSceneSizeY()* parseInt(terrier_height)) / 100 + "px";
   //update logooo position
-  item = document.getElementById('logooo');
-  item.style.bottom = getSceneBottom() + "px";
+  update_logo_position(false);
 
   //update alices' position (alphas included)
   var alice_elements = document.getElementsByClassName('alice');
@@ -595,6 +607,18 @@ function updateElementsPosition()
  //   item.style.
   }
 
+}
+
+/*    //update logooo position */
+function update_logo_position(pourlescredits) {
+  var item = document.getElementById('logooo');
+  if(pourlescredits)
+  {
+    item.style.bottom = "0px";
+  }
+  else {
+    item.style.bottom = getSceneBottom() + "px";
+  }
 }
 
 /* FROM MOZ DEV */

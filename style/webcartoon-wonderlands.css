@@ -251,13 +251,26 @@ cursor: pointer; /* move */
 #creditpage
 {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0px;
   left: 0px;
-  
 }
 
 #creditpage .poesie{
+background: white;
+font-style: oblique;
+margin-right: 10%;
+margin-left: 10%;
+max-width: 500px;
+border-radius: 20px;
+padding: 1%;
+font-size: 80%;
+}
 
-
+#creditpage .textcourant{
+background: white;
+font-style: oblique;
+margin-right: 2%;
+margin-left: 2%;
+padding: 1%;
 }
