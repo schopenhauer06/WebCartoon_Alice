@@ -139,7 +139,6 @@ function affiche_wonderlands(e) {
   //on affiche le decors
   document.body.style.backgroundColor = "black";
   affiche_le_decors(true);
-  document.getElementById('wonderparallax').style.visibility = "visible";
 
   item = document.getElementById('terrier');
   item.style.bottom = getSceneBottom() + "px";
@@ -155,8 +154,10 @@ function affiche_wonderlands(e) {
   affiche_les_champis();
   
   //on affiche le logooo
-  update_logo_position(false);
+  update_logo_position();
   document.getElementById('logooo').style.visibility = "visible";
+  document.getElementById('wonderparallax').style.visibility = "visible";
+
 }
 
 /*
@@ -243,7 +244,7 @@ function affiche_les_alices()
 					{
 					  //assign new zindex based on altitude (sizefactor)
 					  var zindexbase = 10;
-					  if (parseFloat(this.getAttribute("sizefactor")) > 0.60 ) {
+					  if (parseFloat(this.getAttribute("sizefactor")) > 0.5 ) {
 					    zindexbase = 120;
 					  }
 					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(zindexbase,zindexbase+20);
@@ -460,26 +461,26 @@ function affichePersoAuChampi(event) {
 var creditDisplayed = false;
 function affiche_les_credits()
 {
-  if(creditDisplayed)
+  creditDisplayed = !creditDisplayed;
+  window.scrollTo( 0, 0 );
+  if(!creditDisplayed)
   {
     //on cache le credits
-    window.scrollTo( 0, 0 );
     var item = document.getElementById('creditpage');
     item.style.display = "none";
     affiche_les_scrolls(false);
     affiche_le_decors(true);
+    //to fix size after display none
     updateSceneSize();
-    update_logo_position(false);
+
   }else {
-    window.scrollTo( 0, 0 );
     affiche_le_decors(false);
     affiche_les_scrolls(true);
-    update_logo_position(true);
     //on affiche le credits
     var item = document.getElementById('creditpage');
     item.style.display = "inline";
   }
-  creditDisplayed = !creditDisplayed;
+  update_logo_position();
 }
 
 function affiche_le_decors(visible) {
@@ -569,7 +570,7 @@ function updateElementsPosition()
   item.style.bottom = getSceneBottom() + "px";
   item.style.height = (getSceneSizeY()* parseInt(terrier_height)) / 100 + "px";
   //update logooo position
-  update_logo_position(false);
+  update_logo_position();
 
   //update alices' position (alphas included)
   var alice_elements = document.getElementsByClassName('alice');
@@ -612,9 +613,10 @@ function updateElementsPosition()
 }
 
 /*    //update logooo position */
-function update_logo_position(pourlescredits) {
+function update_logo_position() {
+
   var item = document.getElementById('logooo');
-  if(pourlescredits)
+  if(creditDisplayed)
   {
     item.style.bottom = "0px";
   }
