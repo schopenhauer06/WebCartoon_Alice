@@ -75,7 +75,7 @@ var mouseStartAngle = false;    // The angle of the mouse relative to the image 
 var imageStartAngle = false;    // The rotation angle of the image at the start of the rotation
 
 var clientSceneSizeX, clientSceneSizeY;
-var shoudlUpdateElementsPosition = false;
+var shouldUpdateElementsPosition = false;
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
@@ -146,6 +146,7 @@ function affiche_wonderlands(e) {
   //on affiche les alices
   //TODO precharge les alice dans document complete ?
   affiche_les_alices();
+  affiche_les_champis();
 
   document.getElementById('terrier').onclick = function(){crazyLapinou();};
   
@@ -177,21 +178,21 @@ function parallax_wonderland(e){
 }
 
 var alice_bank = [
-{name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_roxane.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8%", top:"auto", right:"20%", left:"auto", width: "80px", height:"auto" },
-{name:"alice", url:'./res/alice_anissa.gif', zindex:100, bottom:"15%", top:"auto",          right:"auto", left:"38%", width: "90px", height:"auto" },
-{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:100, bottom:"12%", top:"auto",  right:"auto", left:"25%", width: "150px", height:"auto" }
+/*{name:"alice", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
+{name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:120, bottom:"15", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_jorge_couto.gif', zindex:120, bottom:"3", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:120, bottom:"20", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_bilel.gif', zindex:120, bottom:"20", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:120, bottom:"3", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_roxane.gif', zindex:120, bottom:"2", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8", top:"auto", right:"20%", left:"auto", width: "80px", height:"auto" },
+{name:"alice", url:'./res/alice_anissa.gif', zindex:120, bottom:"15", top:"auto",          right:"auto", left:"38%", width: "90px", height:"auto" },
+{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"12", top:"auto",  right:"auto", left:"25%", width: "150px", height:"auto" }
 ];
 
 function affiche_les_alices()
 {	
-  var alice_nb = alice_bank.length;
-  for (var i = 0; i < alice_nb; ++i)
+  for (var i = 0; i < alice_bank.length; ++i)
   {
 	  var newElemAlpha= document.createElement("div");
     newElemAlpha.setAttribute("class", "draggable alice");
@@ -236,16 +237,15 @@ function affiche_les_alices()
 					{
 					  //assign new zindex based on altitude (sizefactor)
 					  var zindexbase = 10;
-					  console.log(this.getAttribute("sizefactor"));
 					  if (parseFloat(this.getAttribute("sizefactor")) > 0.5 ) {
-					    zindexbase = 100;
+					    zindexbase = 120;
 					  }
 					  document.getElementById("alice"+divIndex).style.zIndex = getRandomIntInclusive(zindexbase,zindexbase+20);
 					}
 				;}
 		});
-    
-    newElemAlpha.style.bottom = alice_bank[i].bottom;
+
+    newElemAlpha.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[i].bottom) / 100 + "px";
     newElemAlpha.style.top = alice_bank[i].top;
     newElemAlpha.style.right = alice_bank[i].right;
     newElemAlpha.style.left = alice_bank[i].left;
@@ -258,7 +258,7 @@ function affiche_les_alices()
     var newElemDiv = document.createElement("div");
     //TODO remove draggable 
     newElemDiv.setAttribute("class", "draggable alice");
-    newElemDiv.style.bottom = alice_bank[i].bottom;
+    newElemDiv.style.bottom = newElemAlpha.style.bottom;
     newElemDiv.style.top = alice_bank[i].top;
     newElemDiv.style.right = alice_bank[i].right;
     newElemDiv.style.left = alice_bank[i].left;
@@ -283,13 +283,59 @@ function affiche_les_alices()
   }
 }
 
+var champi_bank = [
+/*{name:"champi", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
+{name:"champi", url:'./res/mushroom_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"10", top:"auto",  right:"30%", left:"auto", width: "100px", height:"auto" },
+{name:"champi", url:'./res/mushroom_KENGYBORGESRODRIGUES02.gif', zindex:501, bottom:"8", top:"auto",      right:"auto", left:"17%", width: "240px", height:"auto" },
+{name:"champi", url:'./res/mushroom_vrai.gif', zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100px", height:"auto" },
+{name:"champi", url:'./res/mushroom.gif', zindex:100, bottom:"26", top:"auto",           right:"auto", left:"30%", width: "100px", height:"auto" }
+];
+
+function affiche_les_champis() {
+  for (var i = 0; i < champi_bank.length; ++i)
+  {
+	  var newElemAlpha= document.createElement("div");
+    newElemAlpha.setAttribute("class", "champi");
+    newElemAlpha.style.bottom = getSceneBottom() + (getSceneSizeY()* champi_bank[i].bottom) / 100 + "px";
+    newElemAlpha.style.top = champi_bank[i].top;
+    newElemAlpha.style.right = champi_bank[i].right;
+    newElemAlpha.style.left = champi_bank[i].left;
+    newElemAlpha.style.width = champi_bank[i].width;
+    //newElemAlpha.style.height : see after <img> creation
+    newElemAlpha.style.zIndex = 1000;
+    newElemAlpha.style.backgroundPosition = "0,0";  
+    newElemAlpha.onclick = function(){crazyLapinou();};
+
+    var newElemDiv = document.createElement("div");
+    newElemDiv.setAttribute("class", "champi");
+    newElemDiv.style.bottom = newElemAlpha.style.bottom;
+    newElemDiv.style.top = champi_bank[i].top;
+    newElemDiv.style.right = champi_bank[i].right;
+    newElemDiv.style.left = champi_bank[i].left;
+    newElemDiv.style.width = champi_bank[i].width;
+    newElemDiv.style.height = champi_bank[i].height;
+    newElemDiv.style.zIndex = champi_bank[i].zindex;
+
+    var newElemImg = document.createElement("img");
+    newElemImg.src = champi_bank[i].url;
+    newElemDiv.appendChild(newElemImg);
+
+    newElemAlpha.style.height = parseInt(champi_bank[i].width)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+
+    var wonderParaElem = document.getElementById("wonderparallax");
+    wonderParaElem.appendChild(newElemAlpha);
+    wonderParaElem.appendChild(newElemDiv);
+  }
+}
+
 var lapinou_bank = [
+/*{name:"lapinou", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
 {name:"lapinou", url:'./res/lapin_jorge_couto.gif', zindex:100, bottom:"15%", top:"auto",  right:"40%", left:"auto", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_lapin.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_iman.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_katheryn.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
-{name:"lapinou", url:'./res/lapin_ocean.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_ocean.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" }
 ];
 
 
@@ -401,16 +447,24 @@ function getSceneSizeY()
   return document.getElementById("wonderparallax").clientHeight;
 }
 
+function getSceneBottom() {
+  return getClientSceneSizeY()/2 - getSceneSizeY()/2;
+}
+
 function updateElementsPosition()
 {
   //update terrier position
   var item = document.getElementById('terrier');
-  item.style.bottom = getClientSceneSizeY()/2 - getSceneSizeY()/2 + "px";
-
+  item.style.bottom = getSceneBottom() + "px";
+  //update alices' position (alphas included)
   var alice_elements = document.getElementsByClassName('alice');
   for (var i = 0; i < alice_elements.length; ++i)
   {
- //   var item = alice_elements[i];
+    var item = alice_elements[i];
+    var divIndex = item.id.substring(5); // alpha.lenght
+//    console.log(getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px");
+    item.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
+ 
  //   item.style.
 
   }
