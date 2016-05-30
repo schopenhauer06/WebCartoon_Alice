@@ -185,13 +185,11 @@ cursor: pointer; /* move */
 
 #terrier
 {
-/*test posi >>>*/
   position: absolute;
-/*test posi <<<   position: fixed;*/
-  width: 10%;
-  height: 7%;
+  width: 12%;
+/*  height: 16%; fixed in js */ 
   bottom: 0%;
-  left: 2%;
+  left: 3%;
   
   background-color: yellow;
 /*  bac */
@@ -214,3 +212,16 @@ cursor: pointer; /* move */
 	width: 100%;
 }
 
+
+
+/******************************************/
+/******** CREDIT ***************************/
+/******************************************/
+
+#creditpage
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  
+}

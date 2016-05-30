@@ -36,6 +36,7 @@
 //TODO Bouche sound
 //TODO Parallax sound
 //TODO Logo + page credit
+//TODO Tout les elements
 
 //PRIO 2
 //TODO precharge les alice dans document complete ?
@@ -76,6 +77,8 @@ var imageStartAngle = false;    // The rotation angle of the image at the start 
 
 var clientSceneSizeX, clientSceneSizeY;
 var shouldUpdateElementsPosition = false;
+
+var terrier_height = "16%";
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
@@ -126,6 +129,11 @@ function bouche_random() {
 
 function affiche_wonderlands(e) {
 
+  //on cache le credits
+  var item = document.getElementById('creditpage');
+  item.style.display = "none";
+
+
   //on cache et stop les bouches
   var item = document.getElementById('bouchecentre');
   item.style.display = "none";
@@ -137,9 +145,10 @@ function affiche_wonderlands(e) {
   document.getElementById('wonderparallax').style.visibility = "visible";
 
   var item = document.getElementById('terrier');
-  item.style.bottom = getClientSceneSizeY()/2 - getSceneSizeY()/2 + "px";
-
-  // on appelle a la main une premiere fois
+  item.style.bottom = getSceneBottom() + "px";
+  item.style.height = (getSceneSizeY()* parseInt(terrier_height)) / 100 + "px";
+  item.onclick = function(){crazyLapinou();};
+  // on appelle parallax_wonderland une premiere fois
   //pour eviter les glitch (de la position fixe des css)
   parallax_wonderland(e);
 
@@ -147,8 +156,6 @@ function affiche_wonderlands(e) {
   //TODO precharge les alice dans document complete ?
   affiche_les_alices();
   affiche_les_champis();
-
-  document.getElementById('terrier').onclick = function(){crazyLapinou();};
   
   shouldUpdateElementsPosition = true;
 }
@@ -204,7 +211,7 @@ function affiche_les_alices()
 				{
 				  //on start display div front
 					var divIndex = this.id.substring(5); // alpha.lenght
-					document.getElementById("alice"+divIndex).style.zIndex = 1001;
+					document.getElementById("alice"+divIndex).style.zIndex = 2001;
 				},
 			drag: function()
 				{
@@ -251,7 +258,7 @@ function affiche_les_alices()
     newElemAlpha.style.left = alice_bank[i].left;
     newElemAlpha.style.width = alice_bank[i].width;
     //newElemAlpha.style.height : see after <img> creation
-    newElemAlpha.style.zIndex = 1000;
+    newElemAlpha.style.zIndex = 2000;
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
     	  
@@ -288,7 +295,7 @@ var champi_bank = [
 {name:"champi", url:'./res/mushroom_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"10", top:"auto",  right:"30%", left:"auto", width: "100px", height:"auto" },
 {name:"champi", url:'./res/mushroom_KENGYBORGESRODRIGUES02.gif', zindex:501, bottom:"8", top:"auto",      right:"auto", left:"17%", width: "240px", height:"auto" },
 {name:"champi", url:'./res/mushroom_vrai.gif', zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100px", height:"auto" },
-{name:"champi", url:'./res/mushroom.gif', zindex:100, bottom:"26", top:"auto",           right:"auto", left:"30%", width: "100px", height:"auto" }
+{name:"champi", url:'./res/mushroom.gif', zindex:100, bottom:"32", top:"auto",           right:"auto", left:"50%", width: "100px", height:"auto" }
 ];
 
 function affiche_les_champis() {
@@ -305,6 +312,7 @@ function affiche_les_champis() {
     newElemAlpha.style.zIndex = 1000;
     newElemAlpha.style.backgroundPosition = "0,0";  
     newElemAlpha.onclick = function(){crazyLapinou();};
+    newElemAlpha.id = "alpha" + i;
 
     var newElemDiv = document.createElement("div");
     newElemDiv.setAttribute("class", "champi");
@@ -315,7 +323,8 @@ function affiche_les_champis() {
     newElemDiv.style.width = champi_bank[i].width;
     newElemDiv.style.height = champi_bank[i].height;
     newElemDiv.style.zIndex = champi_bank[i].zindex;
-
+    newElemDiv.id = "champ" + i;
+    
     var newElemImg = document.createElement("img");
     newElemImg.src = champi_bank[i].url;
     newElemDiv.appendChild(newElemImg);
@@ -456,17 +465,30 @@ function updateElementsPosition()
   //update terrier position
   var item = document.getElementById('terrier');
   item.style.bottom = getSceneBottom() + "px";
+  item.style.bottom = getSceneBottom() + "px";
+  item.style.height = (getSceneSizeY()* parseInt(terrier_height)) / 100 + "px";
   //update alices' position (alphas included)
   var alice_elements = document.getElementsByClassName('alice');
   for (var i = 0; i < alice_elements.length; ++i)
   {
     var item = alice_elements[i];
     var divIndex = item.id.substring(5); // alpha.lenght
-//    console.log(getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px");
     item.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
+    //if dragged, x pos in pixel (right/left)
+ //   if(item.style.right.indexOf("px")
+ //     item.style.right = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
+ //   item.style.
+  }
+
+  //update champi' position (alphas included)
+  var champi_elements = document.getElementsByClassName('champi');
+  for (var i = 0; i < champi_elements.length; ++i)
+  {
+    var item = champi_elements[i];
+    var divIndex = item.id.substring(5); // alpha.lenght
+    item.style.bottom = getSceneBottom() + (getSceneSizeY()* champi_bank[divIndex].bottom)/100 + "px";
  
  //   item.style.
-
   }
 
 }
