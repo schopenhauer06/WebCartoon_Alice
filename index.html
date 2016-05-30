@@ -13,11 +13,11 @@
 <title>WebCartoon : Alice in WonderLands</title>
 
 
-<link rel="stylesheet" href="./js/extra/jquery-ui.css">
+<link rel="stylesheet" href="./js/extra/jquery-ui/jquery-ui.css">
 
 <link type="text/css" rel="stylesheet" media="screen" href="./style/webcartoon-wonderlands.css">
 </head>
-<body>
+<body onload="initAudioApiSupport('./res/son/ambianceRUE.mp3',sceneSoundBank)">
 
 <!--FIRST SCENE : LES BOUCHES -->
 <div id="bouchecentre">
@@ -122,17 +122,20 @@ de la Fondation BNP Paribas</a>. </p>
 
 <p class="textcourant">
 <a href="https://www.facebook.com/atelierwebcartoon/">WEB CARTOON sur Facebook</a> 
-  </p>
-  
+</p>
 
 </div>
 <!-- FIN PAGE CREDIT -->
 
 <!-- inclusion des scripts à la fin du DOM -->
 <!-- JQuery UI - draggable & resizable --> 
-<script src="./js/extra/jquery-1.11.2.min.js"></script>
-<script src="./js/extra/jquery-ui.js"></script>
+<script src="./js/extra/jquery-ui/jquery-1.11.2.min.js"></script>
+<script src="./js/extra/jquery-ui/jquery-ui.js"></script>
+<!-- Gestion des ressources sonores -->
+<script type="text/javascript" src="./js/extra/webaudioapi/audioapi.js"></script>
+<script type="text/javascript" src="./js/extra/webaudioapi/buffer-loader.js"></script>
 
+<script type="text/javascript" src="./js/webcart0n-wonderlands-son.js"></script>
 <script type="text/javascript" src="./js/webcart0n-wonderlands.js"></script>
 
 
