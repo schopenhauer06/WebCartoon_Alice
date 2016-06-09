@@ -86,11 +86,9 @@ var terrier_height = "16%";
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
-  if (document.readyState == "loading") {
-    window.scrollTo( 0, 0 );
-  }
   if (document.readyState == "complete")
   {
+    window.scrollTo( 0, 0 );
     affiche_les_scrolls(false);
     window.onresize=function(){updateSceneSize();};
 	  //on lance la boucle des bouches
@@ -137,7 +135,7 @@ function lire_le_poeme(lirelepoeme) {
   if(lirelepoeme) {
     poemeencours = getRandomIntInclusive(0, 2);
     var strartindex = getRandomIntInclusive(0, 20);
-    console.log(poemeencours + " " + strartindex + " ");
+//    console.log(poemeencours + " " + strartindex + " ");
     playSound(poemeencours, strartindex);
   }
   else{
@@ -327,11 +325,11 @@ function affiche_les_alices()
 
 var champi_bank = [
 /*{name:"champi", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
-{name:"champi", url:'./res/mushroom_KENGY.gif',   zindex:100, bottom:"10", top:"auto",  right:"30%",  left:"auto", width: "100px", height:"auto" },
-{name:"champi", url:'./res/mushroom_KENGY02.gif', zindex:501, bottom:"8",  top:"auto",  right:"auto", left:"17%", width: "240px", height:"auto" },
-{name:"champi", url:'./res/mushroom_vrai.gif',    zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100px", height:"auto" },
-{name:"champi", url:'./res/mushroom_2.gif',       zindex:100, bottom:"18", top:"auto",  right:"5%", left:"auto", width: "100px", height:"auto" },
-{name:"champi", url:'./res/mushroom.gif',         zindex:100, bottom:"32", top:"auto",  right:"auto", left:"50%", width: "100px", height:"auto" }
+{name:"champi", url:'./res/mushroom_KENGY.gif',   zindex:100, bottom:"10", top:"auto",  right:"30%",  left:"auto", width: "100", height:"auto" },
+{name:"champi", url:'./res/mushroom_KENGY02.gif', zindex:501, bottom:"8",  top:"auto",  right:"auto", left:"17%", width: "240", height:"auto" },
+{name:"champi", url:'./res/mushroom_vrai.gif',    zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100", height:"auto" },
+{name:"champi", url:'./res/mushroom_2.gif',       zindex:100, bottom:"18", top:"auto",  right:"5%", left:"auto", width: "100", height:"auto" },
+{name:"champi", url:'./res/mushroom.gif',         zindex:100, bottom:"32", top:"auto",  right:"auto", left:"50%", width: "100", height:"auto" }
 ];
 
 function affiche_les_champis() {
@@ -343,7 +341,7 @@ function affiche_les_champis() {
     newElemAlpha.style.top = champi_bank[i].top;
     newElemAlpha.style.right = champi_bank[i].right;
     newElemAlpha.style.left = champi_bank[i].left;
-    newElemAlpha.style.width = champi_bank[i].width;
+    newElemAlpha.style.width = champi_bank[i].width * factorScene  +"px";
     //newElemAlpha.style.height : see after <img> creation
     newElemAlpha.style.zIndex = 1000;
     newElemAlpha.style.backgroundPosition = "0,0";
@@ -355,7 +353,7 @@ function affiche_les_champis() {
     newElemDiv.style.top = champi_bank[i].top;
     newElemDiv.style.right = champi_bank[i].right;
     newElemDiv.style.left = champi_bank[i].left;
-    newElemDiv.style.width = champi_bank[i].width;
+    newElemDiv.style.width = champi_bank[i].width * factorScene  +"px";
     newElemDiv.style.height = champi_bank[i].height;
     newElemDiv.style.zIndex = champi_bank[i].zindex;
     newElemDiv.id = "champ" + i;
@@ -640,7 +638,7 @@ function updateElementsPosition()
     var item = champi_elements[i];
     var divIndex = item.id.substring(5); // alpha.lenght
     item.style.bottom = getSceneBottom() + (getSceneSizeY()* champi_bank[divIndex].bottom)/100 + "px";
- 
+    item.style.width =  champi_bank[divIndex].width * factorScene  +"px";
  //   item.style.
   }
 
