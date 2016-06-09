@@ -86,7 +86,9 @@ var terrier_height = "16%";
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
-
+  if (document.readyState == "loading") {
+    window.scrollTo( 0, 0 );
+  }
   if (document.readyState == "complete")
   {
     affiche_les_scrolls(false);
