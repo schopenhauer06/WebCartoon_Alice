@@ -1,3 +1,5 @@
+/// From : http://www.html5rocks.com/en/tutorials/webaudio/intro/#toc-abstract
+
 function BufferLoader(context, urlList, callback) {
   this.context = context;
   this.urlList = urlList;

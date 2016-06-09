@@ -86,7 +86,9 @@ var terrier_height = "16%";
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
-
+  if (document.readyState == "loading") {
+    window.scrollTo( 0, 0 );
+  }
   if (document.readyState == "complete")
   {
     affiche_les_scrolls(false);
@@ -128,6 +130,25 @@ function bouche_random() {
   }, delayInSeconds * 1000);
 
 }
+
+var poemeencours = -1;
+function lire_le_poeme(lirelepoeme) {
+
+  if(lirelepoeme) {
+    poemeencours = getRandomIntInclusive(0, 2);
+    var strartindex = getRandomIntInclusive(0, 20);
+    console.log(poemeencours + " " + strartindex + " ");
+    playSound(poemeencours, strartindex);
+  }
+  else{
+    if(poemeencours != -1){
+      stopSound(poemeencours);
+      poemeencours = -1;
+    }
+  }
+
+}
+
 
 function affiche_wonderlands(e) {
   //on cache et stop les bouches

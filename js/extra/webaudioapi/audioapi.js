@@ -76,36 +76,34 @@ function playBackgroundSound(){
 	backgroundSound.start(0);
 }
 
-function playSound(soundIndex) {
-	if (soundBankLoaded)  
+function playSound(soundIndex, startIndex) {
+	if (soundBankLoaded)
 	{
+	  if (!startIndex) {
+	    var startIndex = 0;
+	  }
 		bufferLoaded[soundIndex] = context.createBufferSource();
 		bufferLoaded[soundIndex].buffer = bufferListSaved[soundIndex];
 		bufferLoaded[soundIndex].connect(context.destination);
-		
-	// Create a gain node.
-	var gainNode = context.createGain();
-	// Connect the source to the gain node.
-	bufferLoaded[soundIndex].connect(gainNode);
-	// Connect the gain node to the destination.
-	gainNode.connect(context.destination);	
-	
-	// Reduce the volume.
-	gainNode.gain.value = 1.0;
-		
+
+  	// Create a gain node.
+  	var gainNode = context.createGain();
+  	// Connect the source to the gain node.
+  	bufferLoaded[soundIndex].connect(gainNode);
+  	// Connect the gain node to the destination.
+  	gainNode.connect(context.destination);	
+  	// Reduce the volume.
+  	gainNode.gain.value = 1.0;
+
 		bufferLoaded[soundIndex].loop = true;
-//		bufferLoaded[soundIndex][bufferLoaded[soundIndex].start ? 'start' : 'noteOn'](0);
-		bufferLoaded[soundIndex].start(0);		// play the source now
+		bufferLoaded[soundIndex].start(0, startIndex);		// play the source now
 	}                           					// note: on older systems, may have to use deprecated noteOn(time);
-                                             
 }
 
 function stopSound(soundIndex) {
 	if (soundBankLoaded)  
 	{
 		bufferLoaded[soundIndex].stop(0); // stop the source now
-//		bufferLoaded[soundIndex].pause(0); // stop the source now
-		//bufferLoaded[soundIndex].currentTime = 0;
 	}                             // note: on older systems, may have to use deprecated noteOff(time);
 }
 
@@ -133,12 +131,11 @@ function finishedLoading(bufferList) {
 //		bufferLoaded[i] = context.createBufferSource();
 //		bufferLoaded[i].buffer = bufferList[i];
 		bufferListSaved[i] = bufferList[i];
-	
 //		bufferLoaded[i].connect(context.destination);
 	//	bufferLoaded[i].start(0);
 	}
 	
-//			document.getElementById("audiosupport").innerHTML="Sons chargés!";
-//			document.getElementById("audiosupport").style.backgroundColor="green";
+			document.getElementById("audiosupport").innerHTML="Sons chargés!";
+			document.getElementById("audiosupport").style.backgroundColor="green";
 	soundBankLoaded = true;
 }

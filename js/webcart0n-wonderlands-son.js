@@ -1,4 +1,7 @@
 var sceneSoundBank =     [
+      './res/son/a.mp3', // 00
+      './res/son/b.mp3',	// 01
+      './res/son/c.mp3'	// 02
 
 /*      './res/son/aliciasnake.mp3', // 00
       './res/son/baptiste.mp3',	// 01
