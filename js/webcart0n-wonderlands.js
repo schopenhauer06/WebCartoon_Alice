@@ -194,6 +194,10 @@ var alice_bank = [
 {name:"alice", url:'./res/alice_roxane.gif', zindex:120, bottom:"2", top:"auto",           right:"auto", left:"42%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8", top:"auto", right:"20%", left:"auto", width: "80", height:"auto" },
 {name:"alice", url:'./res/alice_anissa.gif', zindex:120, bottom:"15", top:"auto",          right:"auto", left:"38%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_shahynesse.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_rachel.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_hicham.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_denis.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"12", top:"auto",  right:"auto", left:"25%", width: "150", height:"auto" }
 ];
 
@@ -302,10 +306,11 @@ function affiche_les_alices()
 
 var champi_bank = [
 /*{name:"champi", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
-{name:"champi", url:'./res/mushroom_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"10", top:"auto",  right:"30%", left:"auto", width: "100px", height:"auto" },
-{name:"champi", url:'./res/mushroom_KENGYBORGESRODRIGUES02.gif', zindex:501, bottom:"8", top:"auto",      right:"auto", left:"17%", width: "240px", height:"auto" },
-{name:"champi", url:'./res/mushroom_vrai.gif', zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100px", height:"auto" },
-{name:"champi", url:'./res/mushroom.gif', zindex:100, bottom:"32", top:"auto",           right:"auto", left:"50%", width: "100px", height:"auto" }
+{name:"champi", url:'./res/mushroom_KENGY.gif',   zindex:100, bottom:"10", top:"auto",  right:"30%",  left:"auto", width: "100px", height:"auto" },
+{name:"champi", url:'./res/mushroom_KENGY02.gif', zindex:501, bottom:"8",  top:"auto",  right:"auto", left:"17%", width: "240px", height:"auto" },
+{name:"champi", url:'./res/mushroom_vrai.gif',    zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100px", height:"auto" },
+{name:"champi", url:'./res/mushroom_2.gif',       zindex:100, bottom:"18", top:"auto",  right:"5%", left:"auto", width: "100px", height:"auto" },
+{name:"champi", url:'./res/mushroom.gif',         zindex:100, bottom:"32", top:"auto",  right:"auto", left:"50%", width: "100px", height:"auto" }
 ];
 
 function affiche_les_champis() {
@@ -354,6 +359,7 @@ var lapinou_bank = [
 {name:"lapinou", url:'./res/lapin_iman.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_bilel.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_katheryn.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
+{name:"lapinou", url:'./res/lapin_iman2.gif', zindex:100, bottom:"3%", top:"auto",   right:"auto", left:"10%", width: "90px", height:"auto" },
 {name:"lapinou", url:'./res/lapin_ocean.gif', zindex:100, bottom:"2%", top:"auto",           right:"auto", left:"42%", width: "90px", height:"auto" }
 ];
 
@@ -418,12 +424,19 @@ var perso_bank = [
 {name:"chat", url:'./res/chat_eyes.gif', zindex:100, bottom:"3%", top:"auto",      right:"10%", left:"auto", width: "50px", height:"auto" },
 {name:"chat", url:'./res/chat_ocean.gif', zindex:100, bottom:"20%", top:"auto",  right:"auto", left:"50%", width: "50px", height:"auto" },
 {name:"chat", url:'./res/chat_alyzea.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "50px", height:"auto" },
+{name:"chat", url:'./res/chat_hicham2.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "50px", height:"auto" },
+{name:"chat", url:'./res/chat_hicham.gif', zindex:100, bottom:"20%", top:"auto",           right:"30%", left:"auto", width: "50px", height:"auto" },
 {name:"peintre", url:'./res/bilel_peintre.gif', zindex:100, bottom:"7%", top:"auto",           right:"auto", left:"77%", width: "50px", height:"auto" },
-{name:"caterpillar", url:'./res/caterpilar_darsigovmouslim.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"caterpillar", url:'./res/caterpilar_darsi.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
 {name:"caterpillar", url:'./res/alyzea_caterpillar.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
 {name:"grenouille", url:'./res/gagik.Hakobyan.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
 {name:"twins", url:'./res/katheryn_twins.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
 {name:"rose", url:'./res/katheryn_rose.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"chapeliere", url:'./res/chapelier_shahynesse.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"smiley", url:'./res/smiley_ramy.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"reine", url:'./res/reine_rachel.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"crapaud", url:'./res/crapaud.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
+{name:"caterpillar", url:'./res/caterpillar_amine.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" },
 {name:"chapeau", url:'./res/katheryn_hat.gif', zindex:100, bottom:"10%", top:"auto",           right:"62%", left:"auto", width: "50px", height:"auto" }
 ];
 
