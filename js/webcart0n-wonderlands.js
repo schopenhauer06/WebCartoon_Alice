@@ -129,6 +129,25 @@ function bouche_random() {
 
 }
 
+var poemeencours = -1;
+function lire_le_poeme(lirelepoeme) {
+
+  if(lirelepoeme) {
+    poemeencours = getRandomIntInclusive(0, 2);
+    var strartindex = getRandomIntInclusive(0, 20);
+    console.log(poemeencours + " " + strartindex + " ");
+    playSound(poemeencours, strartindex);
+  }
+  else{
+    if(poemeencours != -1){
+      stopSound(poemeencours);
+      poemeencours = -1;
+    }
+  }
+
+}
+
+
 function affiche_wonderlands(e) {
   //on cache et stop les bouches
   item = document.getElementById('bouchecentre');
