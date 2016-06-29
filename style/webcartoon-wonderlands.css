@@ -252,7 +252,20 @@ cursor: pointer; /* move */
   position: absolute;
   top: 0px;
   left: 0px;
-  margin-right: 350px
+  margin-right: 350px;
+  padding-bottom: 500px;
+}
+
+#summary{
+right: 10em;
+position: fixed;
+margin-top: 2em;
+}
+
+#summary a{
+font-size: 180%;
+color: white;
+margin-bottom:2em;
 }
 
 #creditpage .poesie{
@@ -286,3 +299,13 @@ margin-right: 30px;
 margin-left: 2%;
 padding: 1%;
 }
+
+#creditpage a{
+text-decoration: none;
+}
+
+#creditpage a:hover{
+text-decoration: underline;
+}
+
+
