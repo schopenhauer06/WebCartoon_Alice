@@ -88,16 +88,21 @@ var terrier_height = "16%";
 document.onreadystatechange = function () {
   if (document.readyState == "complete")
   {
-    window.scrollTo( 0, 0 );
-    affiche_les_scrolls(false);
-    window.onresize=function(){updateSceneSize();};
-	  //on lance la boucle des bouches
-	  bouche_random();
-	  //pour la scene suivante.
-	  document.getElementById('bouchecentre').onclick = affiche_wonderlands;
-	  
-	  updateSceneSize();
+	document.addEventListener("soundBankLoaded", function (e){
+  		// e.target matches elem
+	 	//prépa pour la scene suivante.
+		document.getElementById('bouchecentre').onclick = affiche_wonderlands;
+		//on lance la boucle des bouches
+		bouche_random();
+	}, false);
   }
+  if (document.readyState == "interactive")
+  {
+	updateSceneSize();
+	window.scrollTo( 0, 0 );
+   affiche_les_scrolls(false);
+   window.onresize=function(){updateSceneSize();};
+   }
 }
 
 var bouche_random_timerid;

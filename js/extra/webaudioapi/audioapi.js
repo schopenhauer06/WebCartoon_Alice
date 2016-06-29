@@ -77,7 +77,7 @@ function playBackgroundSound(){
 }
 
 function playSound(soundIndex, startIndex) {
-	if (soundBankLoaded)
+	if (isSoundBankLoaded())
 	{
 	  if (!startIndex) {
 	    var startIndex = 0;
@@ -101,7 +101,7 @@ function playSound(soundIndex, startIndex) {
 }
 
 function stopSound(soundIndex) {
-	if (soundBankLoaded)  
+	if (isSoundBankLoaded())
 	{
 		bufferLoaded[soundIndex].stop(0); // stop the source now
 	}                             // note: on older systems, may have to use deprecated noteOff(time);
@@ -135,7 +135,15 @@ function finishedLoading(bufferList) {
 	//	bufferLoaded[i].start(0);
 	}
 	
-			document.getElementById("audiosupport").innerHTML="Sons chargés!";
-			document.getElementById("audiosupport").style.backgroundColor="green";
+	var evt = document.createEvent("Event");
+	evt.initEvent("soundBankLoaded", true, false);
+	document.dispatchEvent(evt);
+
+	//document.getElementById("audiosupport").innerHTML="Sons chargés!";
+	//document.getElementById("audiosupport").style.backgroundColor="green";
 	soundBankLoaded = true;
+}
+
+function isSoundBankLoaded() {
+	return soundBankLoaded;
 }
