@@ -102,6 +102,9 @@ document.onreadystatechange = function () {
 	window.scrollTo( 0, 0 );
    affiche_les_scrolls(false);
    window.onresize=function(){updateSceneSize();};
+   //preload images : fix the draggable problem!
+   // - was caused by unknown img (and so div)height ! -
+   setTimeout("preloadImages()",100);
    }
 }
 
@@ -173,10 +176,9 @@ function affiche_wonderlands(e) {
   parallax_wonderland(e);
 
   //on affiche les alices
-  //TODO precharge les alice dans document complete ?
   affiche_les_alices();
   affiche_les_champis();
-  
+
   //on affiche le logooo
   update_logo_position();
   document.getElementById('logooo').style.visibility = "visible";
@@ -232,6 +234,51 @@ function affiche_les_alices()
 	  var newElemAlpha= document.createElement("div");
     newElemAlpha.setAttribute("class", "draggable alice");
 
+    newElemAlpha.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[i].bottom) / 100 + "px";
+    newElemAlpha.style.top = alice_bank[i].top;
+    newElemAlpha.style.right = alice_bank[i].right;
+    newElemAlpha.style.left = alice_bank[i].left;
+    newElemAlpha.style.width = alice_bank[i].width*factorScene + "px";
+    //newElemAlpha.style.height : see after <img> creation
+    newElemAlpha.style.zIndex = 2000;
+    newElemAlpha.style.backgroundPosition = "0,0";
+    newElemAlpha.id = "alpha" + i;
+//    newElemAlpha.style.backgroundColor = "orange";
+
+    //init alice size based on screen coordinate
+    var altitude = (100/getSceneSizeY())*parseInt(newElemAlpha.style.bottom);
+    var sizefactor = altitude/100;
+    newElemAlpha.setAttribute("sizefactor", sizefactor);
+
+    var newElemDiv = document.createElement("div");
+    //TODO remove draggable 
+    newElemDiv.setAttribute("class", "draggable alice");
+    newElemDiv.style.bottom = newElemAlpha.style.bottom;
+    newElemDiv.style.top = alice_bank[i].top;
+    newElemDiv.style.right = alice_bank[i].right;
+    newElemDiv.style.left = alice_bank[i].left;
+//    newElemDiv.style.width = alice_bank[i].width + "px";
+    newElemDiv.style.width = alice_bank[i].width*factorScene + "px";
+//    newElemDiv.style.height = alice_bank[i].height;
+    newElemDiv.style.height = alice_bank[i].height;
+    newElemDiv.style.zIndex = alice_bank[i].zindex;
+    newElemDiv.id = "alice" + i;
+    newElemDiv.setAttribute("sizefactor", sizefactor);
+
+    var newElemImg = document.createElement("img");
+    newElemImg.src = alice_bank[i].url;
+    newElemDiv.appendChild(newElemImg);
+
+//    newElemAlpha.style.height = alice_bank[i].width/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+    newElemAlpha.style.height = (alice_bank[i].width*factorScene)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
+    newElemAlpha.setAttribute("originalwidth", alice_bank[i].width);
+    newElemAlpha.setAttribute("originalheight", parseInt(newElemAlpha.style.height));
+
+    var wonderParaElem = document.getElementById("wonderparallax");
+    wonderParaElem.appendChild(newElemAlpha);
+    wonderParaElem.appendChild(newElemDiv);
+//    document.body.appendChild(newElemDiv);
+
     $(newElemAlpha).draggable({
 			scroll: false,
 			cursor: "move",
@@ -279,51 +326,6 @@ function affiche_les_alices()
 					}
 				;}
 		});
-
-    newElemAlpha.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[i].bottom) / 100 + "px";
-    newElemAlpha.style.top = alice_bank[i].top;
-    newElemAlpha.style.right = alice_bank[i].right;
-    newElemAlpha.style.left = alice_bank[i].left;
-    newElemAlpha.style.width = alice_bank[i].width*factorScene + "px";
-    //newElemAlpha.style.height : see after <img> creation
-    newElemAlpha.style.zIndex = 2000;
-    newElemAlpha.style.backgroundPosition = "0,0";
-    newElemAlpha.id = "alpha" + i;
-//    newElemAlpha.style.backgroundColor = "orange";
-
-    //init alice size based on screen coordinate
-    var altitude = (100/getSceneSizeY())*parseInt(newElemAlpha.style.bottom);
-    var sizefactor = altitude/100;
-    newElemAlpha.setAttribute("sizefactor", sizefactor);
-
-    var newElemDiv = document.createElement("div");
-    //TODO remove draggable 
-    newElemDiv.setAttribute("class", "draggable alice");
-    newElemDiv.style.bottom = newElemAlpha.style.bottom;
-    newElemDiv.style.top = alice_bank[i].top;
-    newElemDiv.style.right = alice_bank[i].right;
-    newElemDiv.style.left = alice_bank[i].left;
-//    newElemDiv.style.width = alice_bank[i].width + "px";
-    newElemDiv.style.width = alice_bank[i].width*factorScene + "px";
-//    newElemDiv.style.height = alice_bank[i].height;
-    newElemDiv.style.height = alice_bank[i].height;
-    newElemDiv.style.zIndex = alice_bank[i].zindex;
-    newElemDiv.id = "alice" + i;
-    newElemDiv.setAttribute("sizefactor", sizefactor);
-
-    var newElemImg = document.createElement("img");
-    newElemImg.src = alice_bank[i].url;
-    newElemDiv.appendChild(newElemImg);
-
-//    newElemAlpha.style.height = alice_bank[i].width/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
-    newElemAlpha.style.height = (alice_bank[i].width*factorScene)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
-    newElemAlpha.setAttribute("originalwidth", alice_bank[i].width);
-    newElemAlpha.setAttribute("originalheight", parseInt(newElemAlpha.style.height));
-
-    var wonderParaElem = document.getElementById("wonderparallax");
-    wonderParaElem.appendChild(newElemAlpha);
-    wonderParaElem.appendChild(newElemDiv);
-//    document.body.appendChild(newElemDiv);
 
   }
 }
@@ -624,7 +626,6 @@ function updateElementsPosition()
     //only for alpha div"
     if(item.getAttribute("originalheight"))
     {
-  //    console.log(parseInt(item.style.height) * factorScene +"px");
       item.style.height =  parseInt(item.getAttribute("originalheight")) * factorScene +"px";
     }
 
@@ -659,6 +660,19 @@ function update_logo_position() {
   }
   else {
     item.style.bottom = getSceneBottom() + "px";
+  }
+}
+
+function preloadImages(){
+	//preload img to get ride of "no defined heigth" error that use to break the draggable.
+	preloadAlices();
+}
+
+function preloadAlices() {
+  for (var i = 0; i < alice_bank.length; ++i)
+  {
+    var tmpImg = new Image();
+    tmpImg.src = alice_bank[i].url;
   }
 }
 
