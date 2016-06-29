@@ -666,6 +666,7 @@ function update_logo_position() {
 function preloadImages(){
 	//preload img to get ride of "no defined heigth" error that use to break the draggable.
 	preloadAlices();
+	preloadChampi();
 }
 
 function preloadAlices() {
@@ -675,6 +676,15 @@ function preloadAlices() {
     tmpImg.src = alice_bank[i].url;
   }
 }
+
+function preloadChampi() {
+  for (var i = 0; i < champi_bank.length; ++i)
+  {
+    var tmpImg = new Image();
+    tmpImg.src = champi_bank[i].url;
+  }
+}
+
 
 /* FROM MOZ DEV */
 function getRandomIntInclusive(min, max) {
