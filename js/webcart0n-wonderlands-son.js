@@ -1,6 +1,6 @@
 var sceneSoundBank =     [
-      './res/son/a.mp3', // 00
-      './res/son/b.mp3',	// 01
+      './res/son/3cruels_EN-man.mp3', // 00
+      './res/son/3cruels_EN-woman.mp3',	// 01
       './res/son/c.mp3'	// 02
 
 /*      './res/son/aliciasnake.mp3', // 00
