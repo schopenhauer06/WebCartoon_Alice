@@ -286,3 +286,11 @@ margin-right: 30px;
 margin-left: 2%;
 padding: 1%;
 }
+
+#creditpage a{
+text-decoration: none;
+}
+
+#creditpage a:hover{
+text-decoration: underline;
+}
