@@ -257,7 +257,7 @@ cursor: pointer; /* move */
 }
 
 #summary{
-right: 2em;
+right: 10em;
 position: fixed;
 margin-top: 2em;
 }
