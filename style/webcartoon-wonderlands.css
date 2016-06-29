@@ -296,10 +296,13 @@ padding: 1%;
 
 #creditpage a{
 text-decoration: none;
-font-size: 180%;
-color: white;
 }
 
 #creditpage a:hover{
 text-decoration: underline;
+}
+
+#summary a{
+font-size: 180%;
+color: white;
 }
