@@ -13,21 +13,36 @@ body {
 
 #bouchecentre{
 
-/*  background-color: lightblue; */
+    background-color: lightblue;
+        text-align:center;
+        margin: 10% auto;
+/*
     width: 800px;
     margin: auto;
     margin-top: 20%;
-    z-index: -10;
+    z-index: -10;*/
 }
 
 .boucheloaded:hover{
-cursor: pointer; /* move */
+	cursor: pointer; /* move */
 }
 
-#bouchecentre div {
-    display: inline;
-    float: none;
+.bouchediv{
+    display:inline-block;
+/*    margin:5px 20px;
+    padding:5px;
+    */
 }
+
+.boucheimage{
+/*	max-width: 100%;
+	height: auto;*/
+
+}
+
+/*
+#bouchecentre div {
+}*/
 
 /******************************************/
 /******** PARALLAX ************************/

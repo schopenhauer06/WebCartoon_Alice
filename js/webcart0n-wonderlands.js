@@ -123,7 +123,7 @@ function bouche_random() {
 './res/bouche_KENGYBORGESRODRIGUES_SECONDA.gif',
 './res/bouche_mouslimDARSIGOOV_3cruelsxcf.gif'];
 
-  var bouche_elements = document.getElementsByClassName('bouche');
+  var bouche_elements = document.getElementsByClassName('boucheimage');
 
   bouche_random_timerid = setInterval(function()  //interval changer
   {
