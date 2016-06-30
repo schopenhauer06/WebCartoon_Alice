@@ -212,19 +212,33 @@ function parallax_wonderland(e){
 
 var alice_bank = [
 /*{name:"alice", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
+var alice_bank = [
+/*{name:"alice", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
 {name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:120, bottom:"15", top:"auto",  right:"40%", left:"auto", width: "90", height:"auto" },
+
 {name:"alice", url:'./res/alice_jorge_couto.gif', zindex:120, bottom:"3", top:"auto",      right:"10%", left:"auto", width: "90", height:"auto" },
+
 {name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:120, bottom:"20", top:"auto",  right:"auto", left:"50%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_bilel.gif', zindex:120, bottom:"20", top:"auto",           right:"30%", left:"auto", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:120, bottom:"3", top:"auto",   right:"auto", left:"10%", width: "90", height:"auto" },
+
+{name:"alice", url:'./res/alice_bilel.gif', zindex:110, bottom:"20", top:"auto",           right:"32%", left:"auto", width: "90", height:"auto" },
+
+{name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:80, bottom:"38", top:"auto",   right:"33%", left:"auto", width: "90", height:"auto" },
+
 {name:"alice", url:'./res/alice_roxane.gif', zindex:120, bottom:"2", top:"auto",           right:"auto", left:"42%", width: "90", height:"auto" },
+
 {name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8", top:"auto", right:"20%", left:"auto", width: "80", height:"auto" },
+
 {name:"alice", url:'./res/alice_anissa.gif', zindex:120, bottom:"15", top:"auto",          right:"auto", left:"38%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_shahynesse.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_rachel.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_hicham.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_denis.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"12", top:"auto",  right:"auto", left:"25%", width: "150", height:"auto" }
+
+{name:"alice", url:'./res/alice_shahynesse.gif', zindex:100, bottom:"33", top:"auto",          right:"auto", left:"40%", width: "90", height:"auto" },
+
+{name:"alice", url:'./res/alice_rachel.gif', zindex:100, bottom:"25", top:"auto",          right:"auto", left:"33%", width: "90", height:"auto" },
+
+{name:"alice", url:'./res/alice_hicham.gif', zindex:180, bottom:"17", top:"auto",          right:"auto", left:"6%", width: "90", height:"auto" },
+
+{name:"alice", url:'./res/alice_denis.gif', zindex:120, bottom:"30", top:"auto",          right:"auto", left:"67%", width: "90", height:"auto" },
+
+{name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"23", top:"auto",  right:"auto", left:"10%", width: "150", height:"auto" }
 ];
 
 function affiche_les_alices()
