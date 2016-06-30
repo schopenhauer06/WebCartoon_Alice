@@ -12,15 +12,8 @@ body {
 /******************************************/
 
 #bouchecentre{
-
-    background-color: lightblue;
-        text-align:center;
-        margin: 10% auto;
-/*
-    width: 800px;
-    margin: auto;
-    margin-top: 20%;
-    z-index: -10;*/
+	text-align:center;
+	margin: 10% auto;
 }
 
 .boucheloaded:hover{
@@ -28,7 +21,7 @@ body {
 }
 
 .bouchediv{
-    display:inline-block;
+	display:inline-block;
 /*    margin:5px 20px;
     padding:5px;
     */
@@ -39,10 +32,6 @@ body {
 	height: auto;*/
 
 }
-
-/*
-#bouchecentre div {
-}*/
 
 /******************************************/
 /******** PARALLAX ************************/
@@ -62,12 +51,8 @@ body {
 
 .wonderlands
 {
-
-
-/*test posi >>>*/
   position: absolute;
   top: 0;
-/*test posi <<< position: fixed; */
   height: 100%; 
   width: 100%; /* may not be necessary */
 }
@@ -87,24 +72,16 @@ body {
   width: 101%;
   height: 104%;
   top: 0;
-
-/*    top: 0;*/
-    margin: -1%;
-/*    padding: 1%;
-    left: 0;
-    position: relative;
-*/
+  margin: -1%;
 }
 
 #wonderlands_avant {
   background-image: url(../res/Wonderlands01.png);
   width: 102%;
   height: 102%;
-     top: 0;
+  top: 0;
 
-/*  padding-left: 4%;*/
   margin-left: -2%;
-/*  padding-right: 4%;*/
   margin-right: -2%;
   padding-top: 4%;
   margin-top: -4%;
@@ -116,11 +93,9 @@ body {
   background-image: url(../res/Wonderlands02.png);
   width: 102%;
   height: 102%;
-     top: 0;
+  top: 0;
 
-/*  padding-left: 4%;*/
   margin-left: -2%;
-/*  padding-right: 4%;*/
   margin-right: -2%;
   padding-top: 4%;
   margin-top: -4%;
@@ -130,13 +105,11 @@ body {
 
 #wonderlands_apres {
   background-image: url(../res/Wonderlands03.gif);
-    width: 102%;
+  width: 102%;
   height: 102%;
-     top: 0;
+  top: 0;
 
-/*  padding-left: 4%;*/
   margin-left: -2%;
-/*  padding-right: 4%;*/
   margin-right: -2%;
   padding-top: 4%;
   margin-top: -4%;
@@ -214,14 +187,13 @@ body {
 /*  height: 16%; /* info : fixed in js */ 
   bottom: 0%;
   left: 3%;
-/*  background-color: yellow;*/
   z-index: 2000;
 }
+
 #terrier:hover
 {
  	cursor: pointer;
 }
-
 
 .lapinou
 {
@@ -322,5 +294,3 @@ text-decoration: none;
 #creditpage a:hover{
 text-decoration: underline;
 }
-
-
