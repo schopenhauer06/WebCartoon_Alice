@@ -288,15 +288,15 @@ function affiche_les_alices()
 					{
 					var divIndex = this.id.substring(5); // alpha.lenght
 					//update alice position based on alpha'
-				  var item = document.getElementById("alice"+divIndex);
+					var item = document.getElementById("alice"+divIndex);
 					item.style.left = this.style.left;
 					item.style.top = this.style.top;
 					//update alice size based on screen coordinate
-          var altitude = (100/getSceneSizeY())*parseInt(this.style.top);
-          var sizefactor = altitude/100;
-          this.setAttribute("sizefactor", sizefactor);
-          this.style.width =  this.getAttribute("originalwidth") * factorScene * (sizefactor+0.2) +"px";
-          this.style.height =  this.getAttribute("originalheight") * factorScene * (sizefactor+0.2) +"px";
+					var altitude = (100/getSceneSizeY())*parseInt(this.style.top);
+					var sizefactor = altitude/100;
+					this.setAttribute("sizefactor", sizefactor);
+					this.style.width =  this.getAttribute("originalwidth") * factorScene * (sizefactor+0.2) +"px";
+					this.style.height =  item.firstChild.height  +"px";
 					item.style.height = this.style.height;
 					item.style.width = this.style.width;
 					}
@@ -600,22 +600,18 @@ function updateElementsPosition()
     var divIndex = item.id.substring(5); // alpha.lenght
     // TODO FROM THE TOP after drag!
     item.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
-    
-    item.style.width =  parseInt(alice_bank[divIndex].width) * factorScene  +"px";
-//    item.style.width =  parseInt(alice_bank[divIndex].width) * factorScene * (item.getAttribute("sizefactor")+0.2) +"px";
+
+    if(item.firstChild)
+    {
+      item.style.width = item.firstChild.width;
+    }
 
     //only for alpha div"
     if(item.getAttribute("originalheight"))
     {
-      item.style.height =  parseInt(item.getAttribute("originalheight")) * factorScene +"px";
+    	console.log(document.getElementById("alice"+divIndex).firstChild.height);
+    	item.style.height = document.getElementById("alice"+divIndex).firstChild.height + "px";
     }
-
-//      item.style.height =  parseInt(alice_bank[divIndex].height) * factorScene * (item.getAttribute("sizefactor")+0.2) +"px";    
-
-    //TODO if dragged, x pos in pixel (right/left)
- //   if(item.style.right.indexOf("px")
- //     item.style.right = getSceneBottom() + (getSceneSizeY()* alice_bank[divIndex].bottom)/100 + "px";
- //   item.style.
   }
 
   //update champi' position (alphas included)
