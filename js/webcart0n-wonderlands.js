@@ -221,6 +221,7 @@ var alice_bank = [
 {name:"alice", url:'./res/alice_rachel.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_hicham.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_denis.gif', zindex:120, bottom:"50", top:"auto",          right:"auto", left:"50%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_xd.gif', zindex:120, bottom:"50", top:"auto",  				right:"auto", left:"25%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"12", top:"auto",  right:"auto", left:"25%", width: "150", height:"auto" }
 ];
 
