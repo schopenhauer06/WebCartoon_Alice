@@ -84,6 +84,8 @@ var shouldUpdateElementsPosition = false;
 
 var terrier_height = "16%";
 
+var bouche_random_timerid;
+
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
   if (document.readyState == "complete")
@@ -102,14 +104,10 @@ document.onreadystatechange = function () {
 	window.scrollTo( 0, 0 );
    affiche_les_scrolls(false);
    window.onresize=function(){updateSceneSize();};
-   //preload images : fix the draggable problem!
-   // - was caused by unknown img (and so div)height ! -
+   //preload images
    setTimeout("preloadImages()",100);
    }
 }
-
-var bouche_random_timerid;
-
 
 function bouche_random() {
   var bouchecentre = document.getElementById('bouchecentre'); //get the element
@@ -143,7 +141,6 @@ function lire_le_poeme(lirelepoeme) {
   if(lirelepoeme) {
     poemeencours = getRandomIntInclusive(0, 2);
     var strartindex = getRandomIntInclusive(0, 20);
-//    console.log(poemeencours + " " + strartindex + " ");
     playSound(poemeencours, strartindex);
   }
   else{
@@ -243,7 +240,6 @@ function affiche_les_alices()
     newElemAlpha.style.zIndex = 2000;
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
-//    newElemAlpha.style.backgroundColor = "orange";
 
     //init alice size based on screen coordinate
     var altitude = (100/getSceneSizeY())*parseInt(newElemAlpha.style.bottom);
@@ -257,19 +253,18 @@ function affiche_les_alices()
     newElemDiv.style.top = alice_bank[i].top;
     newElemDiv.style.right = alice_bank[i].right;
     newElemDiv.style.left = alice_bank[i].left;
-//    newElemDiv.style.width = alice_bank[i].width + "px";
     newElemDiv.style.width = alice_bank[i].width*factorScene + "px";
-//    newElemDiv.style.height = alice_bank[i].height;
     newElemDiv.style.height = alice_bank[i].height;
     newElemDiv.style.zIndex = alice_bank[i].zindex;
     newElemDiv.id = "alice" + i;
     newElemDiv.setAttribute("sizefactor", sizefactor);
 
-    var newElemImg = document.createElement("img");
+    //create an real js Image, in place of 'document.createElement("img")' + preload img to fix unknown height 
+    //that was causing functionnalies (drag/click/... on elements ) malfunctions (and a needed reload)
+    var newElemImg = new Image();
     newElemImg.src = alice_bank[i].url;
     newElemDiv.appendChild(newElemImg);
 
-//    newElemAlpha.style.height = alice_bank[i].width/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
     newElemAlpha.style.height = (alice_bank[i].width*factorScene)/parseInt(newElemImg.width) * parseInt(newElemImg.height) + "px";
     newElemAlpha.setAttribute("originalwidth", alice_bank[i].width);
     newElemAlpha.setAttribute("originalheight", parseInt(newElemAlpha.style.height));
@@ -277,7 +272,6 @@ function affiche_les_alices()
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemAlpha);
     wonderParaElem.appendChild(newElemDiv);
-//    document.body.appendChild(newElemDiv);
 
     $(newElemAlpha).draggable({
 			scroll: false,
@@ -290,13 +284,6 @@ function affiche_les_alices()
 				},
 			drag: function()
 				{
-//TODO Restrict drag in scene size
-// On limite la zone de deplacement de l'object a l'interieur d'une zone
-/*					if ($(this).css("left").replace(/px|pt|%/,'')<getClientSceneSizeX()
-					 &&
-						 $(this).css("left").replace(/px|pt|%/,'')>min_x &&
-						 $(this).css("top").replace(/px|pt|%/,'')<max_y_suivre &&
-						 $(this).css("top").replace(/px|pt|%/,'')>min_y) */
 					{
 					var divIndex = this.id.substring(5); // alpha.lenght
 					//update alice position based on alpha'
@@ -397,9 +384,7 @@ function crazyLapinou()
     var newElemDiv = document.createElement("div");
     newElemDiv.setAttribute("class", "lapinou");
     newElemDiv.style.bottom =  getRandomIntInclusive(0,90) + "%";
-//    newElemDiv.style.top = lapinou_bank[i].top;
     newElemDiv.style.right = getRandomIntInclusive(0,90) + "%";
-//    newElemDiv.style.left = lapinou_bank[i].left;
     newElemDiv.style.width = lapinou_bank[i].width;
     newElemDiv.style.height = lapinou_bank[i].height;
     newElemDiv.style.zIndex = lapinou_bank[i].zindex;
@@ -481,13 +466,12 @@ function affichePersoAuChampi(event) {
     newElemDiv.style.zIndex = perso_bank[perso_index].zindex;
     newElemDiv.id = "perso" + perso_index;
 
-    var newElemImg = document.createElement("img");
+    var newElemImg = new Image();
     newElemImg.src = perso_bank[perso_index].url;
     newElemDiv.appendChild(newElemImg);
 
     newElemDiv.style.top = event.clientY + getRandomIntInclusive(-100,100) - parseInt(newElemImg.height)/2 + "px";
     newElemDiv.style.left = event.clientX + getRandomIntInclusive(-100,100) - parseInt(newElemImg.width)/2 + "px";
-
 
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemDiv);
@@ -524,14 +508,10 @@ function affiche_les_credits()
 
 function affiche_le_decors(visible) {
   if (visible) {
-//    document.body.addEventListener("mousemove", myFunction, false);
     document.body.onmousemove = parallax_wonderland;
     document.getElementById('wonderparallax').style.display = "block";
-//    document.getElementById('wonderparallax').style.visibility = "visible";
   }else{
-  //  document.body.onmousemove = parallax_wonderland;
     document.getElementById('wonderparallax').style.display = "none";
-//    document.getElementById('wonderparallax').style.visibility = "hidden";
   }
 }
 
@@ -645,7 +625,6 @@ function updateElementsPosition()
     var divIndex = item.id.substring(5); // alpha.lenght
     item.style.bottom = getSceneBottom() + (getSceneSizeY()* champi_bank[divIndex].bottom)/100 + "px";
     item.style.width =  champi_bank[divIndex].width * factorScene  +"px";
- //   item.style.
   }
 
 }
