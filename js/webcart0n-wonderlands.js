@@ -30,22 +30,17 @@
 
 //PRIO 1
 //TODO alice position : conversion % en px a l'init
-//TODO : fix replace des alices apres changement resolution (ctrl-f5)
+//TODO : fix alices size apres changement resolution (ctrl-f5)
 //TODO Alice sound support (onhover)
-//TODO Bouche sound
-//TODO Parallax sound
-//TODO Logo + page credit
 
 //PRIO 2
-//TODO replace le all perso sur retaille ecran
 //document.getElementById("my-link").addEventListener("click", myFunction, false);
 //TODO ajout class autoresizable pour la fonction mettre a jour position
-//TODO precharge les alice dans document complete ?
 //TODO parallax : pourcentage base sur taille ecran !!!
 //TODO touch screen support for alice
 //TODO gyroscope
 //TODO Restrict alice drag in scene size
-
+//TODO restrict lapinou pos in scene size
 
 /*
 window.ondeviceorientation = function(event) {
@@ -85,6 +80,10 @@ var shouldUpdateElementsPosition = false;
 var terrier_height = "16%";
 
 var bouche_random_timerid;
+
+var zIndexAlphaLapinou = 3000;
+var zIndexAlphaAlice = 2000;
+var zIndexAlphaChampi = 1000;
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
@@ -152,6 +151,17 @@ function lire_le_poeme(lirelepoeme) {
 
 }
 
+function affiche_les_bouches() {
+  document.body.style.backgroundColor = "white";
+  affiche_le_decors(false);
+  document.getElementById('logooo').style.visibility = "hidden";
+
+  //on affiche et demarre les bouches
+  var item = document.getElementById('bouchecentre');
+  item.style.display = "inline-block";
+
+  bouche_random();
+}
 
 function affiche_wonderlands(e) {
   //on cache et stop les bouches
@@ -210,31 +220,18 @@ function parallax_wonderland(e){
 var alice_bank = [
 /*{name:"alice", url:'./res/xxx.gif', zindex:100, bottom:"%", top:"auto",  right:"%", left:"auto", width: "px", height:"auto" },*/
 {name:"alice", url:'./res/alice_katheryn_queen.gif', zindex:120, bottom:"15", top:"auto",  right:"40%", left:"auto", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_jorge_couto.gif', zindex:120, bottom:"3", top:"auto",      right:"10%", left:"auto", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_gagik_Hakobyan.gif', zindex:120, bottom:"20", top:"auto",  right:"auto", left:"50%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_bilel.gif', zindex:110, bottom:"20", top:"auto",           right:"32%", left:"auto", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_barakaISSIHAKA.gif', zindex:80, bottom:"38", top:"auto",   right:"33%", left:"auto", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_roxane.gif', zindex:120, bottom:"2", top:"auto",           right:"auto", left:"42%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_KENGYBORGESRODRIGUES.gif', zindex:100, bottom:"8", top:"auto", right:"20%", left:"auto", width: "80", height:"auto" },
-
 {name:"alice", url:'./res/alice_anissa.gif', zindex:120, bottom:"15", top:"auto",          right:"auto", left:"38%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_shahynesse.gif', zindex:100, bottom:"33", top:"auto",          right:"auto", left:"40%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_rachel.gif', zindex:100, bottom:"25", top:"auto",          right:"auto", left:"33%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_hicham.gif', zindex:180, bottom:"17", top:"auto",          right:"auto", left:"6%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_denis.gif', zindex:120, bottom:"30", top:"auto",          right:"auto", left:"67%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_xd.gif', zindex:120, bottom:"50", top:"auto",  				right:"auto", left:"25%", width: "90", height:"auto" },
-
 {name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"23", top:"auto",  right:"auto", left:"10%", width: "150", height:"auto" }
 ];
 
@@ -251,7 +248,7 @@ function affiche_les_alices()
     newElemAlpha.style.left = alice_bank[i].left;
     newElemAlpha.style.width = alice_bank[i].width*factorScene + "px";
     //newElemAlpha.style.height : see after <img> creation
-    newElemAlpha.style.zIndex = 2000;
+    newElemAlpha.style.zIndex = zIndexAlphaAlice;
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
 
@@ -351,7 +348,7 @@ function affiche_les_champis() {
     newElemAlpha.style.left = champi_bank[i].left;
     newElemAlpha.style.width = champi_bank[i].width * factorScene  +"px";
     //newElemAlpha.style.height : see after <img> creation
-    newElemAlpha.style.zIndex = 1000;
+    newElemAlpha.style.zIndex = zIndexAlphaChampi;
     newElemAlpha.style.backgroundPosition = "0,0";
     newElemAlpha.id = "alpha" + i;
 
@@ -397,18 +394,30 @@ function crazyLapinou()
   {
     var newElemDiv = document.createElement("div");
     newElemDiv.setAttribute("class", "lapinou");
+    newElemDiv.id = "lapinou" + i;
     newElemDiv.style.bottom =  getRandomIntInclusive(0,90) + "%";
     newElemDiv.style.right = getRandomIntInclusive(0,90) + "%";
     newElemDiv.style.width = lapinou_bank[i].width;
     newElemDiv.style.height = lapinou_bank[i].height;
     newElemDiv.style.zIndex = lapinou_bank[i].zindex;
 
-    var newElemImg = document.createElement("img");
+    var newElemImg = new Image();
     newElemImg.src = lapinou_bank[i].url;
     newElemDiv.appendChild(newElemImg);
 
+    var newElemAlpha = document.createElement("div");
+    newElemAlpha.setAttribute("class", "lapinoualpha");
+    newElemAlpha.id = "alphalapinou" + i;
+    newElemAlpha.style.bottom = newElemDiv.style.bottom;
+    newElemAlpha.style.right = newElemDiv.style.right;
+    newElemAlpha.style.width = newElemImg.width+"px";
+    newElemAlpha.style.height = newElemImg.height+"px";
+    newElemAlpha.style.zIndex = zIndexAlphaLapinou;
+    newElemAlpha.onclick = affiche_les_bouches;
+
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemDiv);
+    wonderParaElem.appendChild(newElemAlpha);
   }
 
   var delayInSeconds = 1;                           //delay in seconds
@@ -419,6 +428,9 @@ function crazyLapinou()
     for (var i = 0; i < lapinou_elements.length; ++i)
     {
       var item = lapinou_elements[i];
+      var divIndex = item.id.substring(7); // lapinou.lenght
+      var itemAlpha = document.getElementById("alphalapinou" + divIndex);
+
       switch(getRandomIntInclusive(0,3))
       {
         case 0: //NE
@@ -438,6 +450,8 @@ function crazyLapinou()
             item.style.right = parseInt(item.style.right) + 5 + "%";
         break;
       }
+      itemAlpha.style.bottom = item.style.bottom;
+      itemAlpha.style.right = item.style.right;
     }
   }, delayInSeconds * 1000);
 
@@ -622,7 +636,6 @@ function updateElementsPosition()
     //only for alpha div"
     if(item.getAttribute("originalheight"))
     {
-    	console.log(document.getElementById("alice"+divIndex).firstChild.height);
     	item.style.height = document.getElementById("alice"+divIndex).firstChild.height + "px";
     }
   }
@@ -636,7 +649,6 @@ function updateElementsPosition()
     item.style.bottom = getSceneBottom() + (getSceneSizeY()* champi_bank[divIndex].bottom)/100 + "px";
     item.style.width =  champi_bank[divIndex].width * factorScene  +"px";
   }
-
 }
 
 /*    //update logooo position */
@@ -656,6 +668,7 @@ function preloadImages(){
 	//preload img to get ride of "no defined heigth" error that use to break the draggable.
 	preloadAlices();
 	preloadChampi();
+	preloadLapinou();
 }
 
 function preloadAlices() {
@@ -674,6 +687,13 @@ function preloadChampi() {
   }
 }
 
+function preloadLapinou() {
+  for (var i = 0; i < lapinou_bank.length; ++i)
+  {
+    var tmpImp = new Image();
+    tmpImp.src = lapinou_bank[i].url;
+  }
+}
 
 /* FROM MOZ DEV */
 function getRandomIntInclusive(min, max) {
