@@ -28,6 +28,9 @@
 /* http://allshoreit.com/Blog/?page_id=84                                           */
 /************************************************************************************/
 
+//TODO : alpha lenght has perso
+//TODO : fix champi height (img)
+
 //PRIO 1
 //TODO alice position : conversion % en px a l'init
 //TODO : fix alices size apres changement resolution (ctrl-f5)
@@ -76,9 +79,15 @@ var terrier_height = "16%";
 
 var bouche_random_timerid;
 
+var zIndexPerso = 100;
 var zIndexAlphaLapinou = 3000;
 var zIndexAlphaAlice = 2000;
+var zIndexAlphaPerso = zIndexAlphaAlice;
 var zIndexAlphaChampi = 1000;
+
+var persoGlobalIndex = 0;
+
+var alphaPerso = "alphaPerso";
 
 // hophop ya un debut a tout!
 document.onreadystatechange = function () {
@@ -286,7 +295,7 @@ function affiche_les_alices()
 				{
 				  //on start display div front
 					var divIndex = this.id.substring(5); // alpha.lenght
-					document.getElementById("alice"+divIndex).style.zIndex = 2001;
+					document.getElementById("alice"+divIndex).style.zIndex = zIndexAlphaAlice + 1;
 				},
 			drag: function()
 				{
@@ -477,27 +486,83 @@ var perso_bank = [
 
 function affichePersoAuChampi(event) {
 
-  var perso_nb = 3;/* getRandomIntInclusive(0, perso_bank.length); */
-  for (var i = 0; i < perso_nb; ++i)
+  var persoNb = 3;/* getRandomIntInclusive(0, perso_bank.length); */
+  for (var i = 0; i < persoNb; ++i)
   {
-    var perso_index = getRandomIntInclusive(0, perso_bank.length-1);
+    var persoIndex = getRandomIntInclusive(0, perso_bank.length-1);
     var newElemDiv = document.createElement("div");
+    persoGlobalIndex++;
     newElemDiv.setAttribute("class", "allperso");
 
-    newElemDiv.style.width = perso_bank[perso_index].width;
-    newElemDiv.style.height = perso_bank[perso_index].height;
-    newElemDiv.style.zIndex = perso_bank[perso_index].zindex;
-    newElemDiv.id = "perso" + perso_index;
+    newElemDiv.style.width = perso_bank[persoIndex].width;
+    newElemDiv.style.height = perso_bank[persoIndex].height;
+    newElemDiv.style.zIndex = perso_bank[persoIndex].zindex;
+    newElemDiv.id = "perso" + persoGlobalIndex;
 
     var newElemImg = new Image();
-    newElemImg.src = perso_bank[perso_index].url;
+    newElemImg.src = perso_bank[persoIndex].url;
     newElemDiv.appendChild(newElemImg);
 
     newElemDiv.style.top = event.clientY + getRandomIntInclusive(-100,100) - parseInt(newElemImg.height)/2 + "px";
     newElemDiv.style.left = event.clientX + getRandomIntInclusive(-100,100) - parseInt(newElemImg.width)/2 + "px";
 
+	 var newElemAlpha= document.createElement("div");
+    newElemAlpha.setAttribute("class", "draggable allperso");
+
+    //newElemAlpha.style.bottom = getSceneBottom() + (getSceneSizeY()* alice_bank[i].bottom) / 100 + "px";
+    newElemAlpha.style.top = newElemDiv.style.top;
+    //newElemAlpha.style.right = alice_bank[i].right;
+    newElemAlpha.style.left = newElemDiv.style.left;
+    newElemAlpha.style.width = newElemDiv.style.width;
+    newElemAlpha.style.height = parseInt(newElemImg.height) + "px";
+    newElemAlpha.style.zIndex = zIndexAlphaPerso;
+    newElemAlpha.style.backgroundPosition = "0,0";
+    newElemAlpha.id = alphaPerso + persoGlobalIndex;
+
     var wonderParaElem = document.getElementById("wonderparallax");
     wonderParaElem.appendChild(newElemDiv);
+    wonderParaElem.appendChild(newElemAlpha);
+
+   $(newElemAlpha).draggable({
+			scroll: false,
+			cursor: "move",
+			start: function(event, ui)
+				{
+				  //on start display div front
+					var divIndex = this.id.substring(alphaPerso.length); // alphaperso.lenght
+					document.getElementById("perso"+divIndex).style.zIndex = zIndexAlphaPerso + 1;
+				},
+			drag: function()
+				{
+					{
+					var divIndex = this.id.substring(alphaPerso.length); // alpha.lenght
+					//update perso position based on alpha'
+					var item = document.getElementById("perso"+divIndex);
+					item.style.left = this.style.left;
+					item.style.top = this.style.top;
+					//update alice size based on screen coordinate
+					//var altitude = (100/getSceneSizeY())*parseInt(this.style.top);
+					//var sizefactor = altitude/100;
+					//this.setAttribute("sizefactor", sizefactor);
+					this.style.width =  item.firstChild.width  +"px";
+					this.style.height =  item.firstChild.height  +"px";
+					item.style.height = this.style.height;
+					item.style.width = this.style.width;
+					}
+				},
+			stop: function(event, ui)
+				{
+	        var divIndex = this.id.substring(alphaPerso.length); // alpha.lenght
+					{
+					  //assign new zindex based on altitude (sizefactor)
+					  //var zindexbase = 10;
+					  //if (parseFloat(this.getAttribute("sizefactor")) > 0.5 ) {
+					  //  zindexbase = 120;
+					  //}
+					  document.getElementById("perso"+divIndex).style.zIndex = zIndexPerso;
+					}
+				;}
+		});
   }
 }
 
@@ -664,6 +729,7 @@ function preloadImages(){
 	preloadAlices();
 	preloadChampi();
 	preloadLapinou();
+	preloadPerso();
 }
 
 function preloadAlices() {
@@ -690,6 +756,13 @@ function preloadLapinou() {
   }
 }
 
+function preloadPerso() {
+  for (var i = 0; i < perso_bank.length; ++i)
+  {
+    var tmpImp = new Image();
+    tmpImp.src = perso_bank[i].url;
+  }
+}
 /* FROM MOZ DEV */
 function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
