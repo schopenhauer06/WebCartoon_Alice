@@ -31,16 +31,11 @@
 //PRIO 1
 //TODO alice position : conversion % en px a l'init
 //TODO : fix alices size apres changement resolution (ctrl-f5)
-//TODO Alice sound support (onhover)
 
 //PRIO 2
 //document.getElementById("my-link").addEventListener("click", myFunction, false);
 //TODO ajout class autoresizable pour la fonction mettre a jour position
 //TODO parallax : pourcentage base sur taille ecran !!!
-//TODO touch screen support for alice
-//TODO gyroscope
-//TODO Restrict alice drag in scene size
-//TODO restrict lapinou pos in scene size
 
 /*
 window.ondeviceorientation = function(event) {
