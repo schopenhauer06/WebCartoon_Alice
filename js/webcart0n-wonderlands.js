@@ -231,7 +231,7 @@ var alice_bank = [
 {name:"alice", url:'./res/alice_rachel.gif', zindex:100, bottom:"25", top:"auto",          right:"auto", left:"33%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_hicham.gif', zindex:180, bottom:"17", top:"auto",          right:"auto", left:"6%", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_denis.gif', zindex:120, bottom:"30", top:"auto",          right:"auto", left:"67%", width: "90", height:"auto" },
-{name:"alice", url:'./res/alice_xd.gif', zindex:120, bottom:"50", top:"auto",  				right:"auto", left:"25%", width: "90", height:"auto" },
+{name:"alice", url:'./res/alice_xd.gif', zindex:120, bottom:"30", top:"auto",  				right:"37%", left:"auto", width: "90", height:"auto" },
 {name:"alice", url:'./res/alice_COLOMBIKYLLIAN.gif', zindex:120, bottom:"23", top:"auto",  right:"auto", left:"10%", width: "150", height:"auto" }
 ];
 
@@ -333,7 +333,7 @@ var champi_bank = [
 {name:"champi", url:'./res/mushroom_KENGY.gif',   zindex:100, bottom:"10", top:"auto",  right:"30%",  left:"auto", width: "100", height:"auto" },
 {name:"champi", url:'./res/mushroom_KENGY02.gif', zindex:501, bottom:"8",  top:"auto",  right:"auto", left:"17%", width: "240", height:"auto" },
 {name:"champi", url:'./res/mushroom_vrai.gif',    zindex:100, bottom:"22", top:"auto",  right:"auto", left:"5%", width: "100", height:"auto" },
-{name:"champi", url:'./res/mushroom_2.gif',       zindex:100, bottom:"18", top:"auto",  right:"5%", left:"auto", width: "100", height:"auto" },
+{name:"champi", url:'./res/mushroom_2.gif',       zindex:100, bottom:"31", top:"auto",  right:"15%", left:"auto", width: "100", height:"auto" },
 {name:"champi", url:'./res/mushroom.gif',         zindex:100, bottom:"32", top:"auto",  right:"auto", left:"50%", width: "100", height:"auto" }
 ];
 
