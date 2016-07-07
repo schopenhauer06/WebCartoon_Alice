@@ -255,7 +255,7 @@ margin-top: 2em;
 }
 
 #summary a{
-font-size: 180%;
+/*font-size: 180%;*/
 color: white;
 margin-bottom:2em;
 }
@@ -309,7 +309,7 @@ text-decoration: underline;
 }
 
 #creditpage h1{
-    font-variant: small-caps;
-    font-size:1,7em;
+    /*font-variant: small-caps;*/
+    font-size:1.7em;
 }
 	
